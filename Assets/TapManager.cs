@@ -1,24 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace TestProject
 {
-    public class TapManager : ITickable
+    public class TapManager : MonoBehaviour
     {
+        private bool m_LeftScreenTap;
+        private bool m_RightScreenTap;
 
-        public void Tick()
+        public bool LeftScreenTap => m_LeftScreenTap;
+        public bool RightScreenTap => m_RightScreenTap;
+
+        public void LateUpdate()
         {
-            if (Input.GetMouseButtonDown(0))
+            m_LeftScreenTap = false;
+            m_RightScreenTap = false;
+
+            if (Input.GetMouseButtonUp(0) && EventSystem.current.currentSelectedGameObject == null)
             {
                 if (CheckLeftBound())
                 {
-                    Debug.Log("Left Part Of Screen");
+                    m_LeftScreenTap = true;
                     return;
                 }
 
-                Debug.Log("Right Part Of Screen");
+                m_RightScreenTap = true;
             }
         }
 

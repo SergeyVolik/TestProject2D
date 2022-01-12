@@ -8,9 +8,13 @@ namespace TestProject
 
     public class GameInstall : MonoInstaller
     {
+        [SerializeField]
+        TapManager Tap;
+
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<TapManager>().AsSingle();
+
+            Container.Bind<TapManager>().FromInstance(Tap).AsSingle();
         }
     }
 }
