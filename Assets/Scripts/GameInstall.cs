@@ -10,7 +10,7 @@ namespace TestProject
     {
         public override void InstallBindings()
         {
-
+            Container.BindInterfacesAndSelfTo<TapManager>().AsSingle();
         }
     }
 }
