@@ -14,6 +14,10 @@ GameObject:
   - component: {fileID: -1240718671744208990}
   - component: {fileID: 6192316676583436483}
   - component: {fileID: 9008196202505833192}
+  - component: {fileID: -4862176442317250571}
+  - component: {fileID: 1485140605894089405}
+  - component: {fileID: 919589186212159308}
+  - component: {fileID: -6374396222289169308}
   m_Layer: 7
   m_Name: Bullet
   m_TagString: Untagged
@@ -252,3 +256,62 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6220176, y: 0.29138815}
   m_EdgeRadius: 0
+--- !u!114 &-4862176442317250571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092612182528489458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9247fdffdf2395448d60231157d6a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1485140605894089405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092612182528489458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4faf8b8e1308c07459698eb497e81b21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &919589186212159308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092612182528489458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: -1240718671744208990}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: -6374396222289169308}
+  _bindType: 0
+--- !u!114 &-6374396222289169308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092612182528489458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers: []
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}

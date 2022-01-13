@@ -16,41 +16,26 @@ namespace TestProject
         private bool m_IsGrounded = false;
 
         private int m_CurrentJump;
+
         private HealthHandler m_HealthHandler;
         private Gun m_Gun;
         private PlayerSettings PlayerSettings;
-
         public Vector2 LookDiraction => transform.rotation.eulerAngles.y == 180 ? Vector2.left : Vector2.right;
         public bool LookLeft => transform.rotation.eulerAngles.y == 180 ? true : false;
         public bool IsGrounded => m_IsGrounded;
 
         public event Action OnJumped;
 
-        SoundManager m_SoundManager;
+    
 
         [Inject]
-        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings, SoundManager soundManager)
+        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings)
         {
             m_HealthHandler = healthHandler;
             m_Gun = gun;
             PlayerSettings = settings;
-            m_SoundManager = soundManager;
         }
 
-        private void OnEnable()
-        {
-            m_HealthHandler.OnDamageTaken += DamageTaken;
-        }
-
-        private void OnDisable()
-        {
-            m_HealthHandler.OnDamageTaken -= DamageTaken;
-        }
-
-        void DamageTaken()
-        {
-            m_SoundManager.PlayHitSound();
-        }
 
         private bool CheckGrounded()
         {

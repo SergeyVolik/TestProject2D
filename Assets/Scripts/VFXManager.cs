@@ -33,8 +33,10 @@ namespace TestProject
             effect.transform.position = postion;
         }
 
-        public void PlayBloodEffect(float yRot, Transform transform, Vector2 point)
+        public void PlayBloodEffect(bool fromLeft, Transform transform, Vector2 point)
         {
+            float yRot = fromLeft ? 90 : -90;
+
             var effect = m_BulletEffectFactory.Create();
             effect.transform.SetParent(transform);
             effect.transform.position = point;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,20 +20,17 @@ namespace TestProject
         private Rigidbody2D m_Rg;
         private SpriteRenderer m_SpriteRenderer;
         private ShootingSettigs m_ShootingSettigs;
-        private SoundManager m_SoundsManager;
-        private VFXManager m_VFXManager;
         public SpriteRenderer SpriteRenderer => m_SpriteRenderer;
         public Rigidbody2D Rigidbody2D => m_Rg;
+
+        public event Action<Vector2> OnBulletCollision;
+
         [Inject]
         void Construct(
-            ShootingSettigs settings,
-            SoundManager soundsManager,
-            VFXManager vfxManager
+            ShootingSettigs settings
             )
         {
             m_ShootingSettigs = settings;
-            m_SoundsManager = soundsManager;
-            m_VFXManager = vfxManager;
         }
 
         private void Awake()
@@ -45,32 +43,29 @@ namespace TestProject
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            Debug.Log("OnCollisionEnter bullet");
             var IDamageable = collision.gameObject.GetComponent<IDamageable>();
+
+            bool YRot = SpriteRenderer.flipX ? true : false;
 
             switch (IDamageable)
             {
                 case IHead head:
 
-                    head.TakeDamge(m_ShootingSettigs.HeadDamage);
-
-                    CreateBloodEffect(collision);
+                    head.TakeDamge(m_ShootingSettigs.HeadDamage, collision, YRot);
                     break;
                 case ILeg leg:
 
-                    leg.TakeDamge(m_ShootingSettigs.LegDamage);
-                    CreateBloodEffect(collision);
+                    leg.TakeDamge(m_ShootingSettigs.LegDamage, collision, YRot);
+
                     break;
                 case IChess chess:
-                    chess.TakeDamge(m_ShootingSettigs.ChessDamage);
-                    CreateBloodEffect(collision);
+                    chess.TakeDamge(m_ShootingSettigs.ChessDamage, collision, YRot);
                     break;
                 case IBullet chess:
 
-                    m_VFXManager.PlayBulletCollision(collision.contacts[0].point);
 
-                    chess.TakeDamge(9999);
-                  
+                    chess.TakeDamge(9999, collision, YRot);
+
                     break;
 
             }
@@ -79,19 +74,23 @@ namespace TestProject
 
         }
 
-        void CreateBloodEffect(Collision2D collision)
-        {
-            float YRot = SpriteRenderer.flipX ? 90 : -90;
-            m_VFXManager.PlayBloodEffect(YRot, collision.collider.transform, collision.contacts[0].point);
 
+        public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
+        {
+            if(collision.contacts.Length > 0)
+                OnBulletCollision?.Invoke(collision.contacts[0].point);
+            
+
+            StartCoroutine(WainAndDestory());
         }
 
-        public void TakeDamge(int damage)
+        IEnumerator WainAndDestory()
         {
-            m_SoundsManager.PlayBulletCollistion();
+            yield return null;
+            yield return null;
+            if(gameObject != null)
             Destroy(gameObject);
         }
-
         public class Factory : PlaceholderFactory<Bullet>
         {
 

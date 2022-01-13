@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +15,11 @@ namespace TestProject
         Bullet.Factory m_Factory;
         Player m_Player;
         ShootingSettigs m_ShootingSettigs;
-        SoundManager m_SoundsManager;
         VFXManager m_VFXManager;
 
         private bool m_CanShoot = true;
+
+        public event Action<Vector2> OnShot;
 
         [Inject]
         void Construct(
@@ -30,7 +32,6 @@ namespace TestProject
             m_Factory = factory;
             m_Player = player;
             m_ShootingSettigs = settings;
-            m_SoundsManager = soundsManager;
             m_VFXManager = vfxManager;
 
         }
@@ -47,10 +48,9 @@ namespace TestProject
 
                 bullet.Rigidbody2D.AddForce(m_Player.LookDiraction * m_ShootingSettigs.BulletSpeed);
 
-                m_VFXManager.PlayMuzzleEffectWithPos(m_SpawnPoint.position);
-                m_SoundsManager.PlayPistolShot();
-
                 StartCoroutine(WaiDelay());
+
+                OnShot?.Invoke(m_SpawnPoint.position);
             }
         }
 

@@ -16,7 +16,7 @@ namespace TestProject
         void Construct(HealthHandler health)
         {
             m_Health = health;
-            UpdateHealthBar();
+            UpdateHealthBar(0, null, false);
         }
 
         private void OnEnable()
@@ -29,7 +29,7 @@ namespace TestProject
             m_Health.OnDamageTaken -= UpdateHealthBar;
         }
 
-        void UpdateHealthBar()
+        void UpdateHealthBar(int damage, Collision2D pos, bool fromLeft)
         {
             var health = m_Health.Health;
 

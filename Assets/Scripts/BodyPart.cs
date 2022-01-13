@@ -6,9 +6,9 @@ namespace TestProject
     public abstract class BodyPart : MonoBehaviour
     {
         HealthHandler m_Health;
-        public void TakeDamge(int damage)
+        public void TakeDamge(int damage, Collision2D collsion, bool FromLeftSide)
         {
-            m_Health.TakeDamage(damage);
+            m_Health.TakeDamge(damage, collsion, FromLeftSide);
         }
 
         [Inject]

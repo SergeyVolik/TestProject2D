@@ -6,13 +6,13 @@ using Zenject;
 
 namespace TestProject
 {
-    public class HealthHandler : MonoBehaviour
+    public class HealthHandler : MonoBehaviour, IDamageable
     {
         private int m_Health = 5;
         PlayerSettings m_Settings;
 
         public int Health => m_Health;
-        public event Action OnDamageTaken;       
+        public event Action<int, Collision2D, bool> OnDamageTaken;
 
         [Inject]
         void Construct(PlayerSettings settings)
@@ -22,10 +22,11 @@ namespace TestProject
         }
 
 
-        public void TakeDamage(int damage)
+        public void TakeDamge(int damage, Collision2D collsion, bool FromLeftSide)
         {
             m_Health -= damage;
-            OnDamageTaken.Invoke();
+            OnDamageTaken.Invoke(damage, collsion, FromLeftSide);
         }
+
     }
 }

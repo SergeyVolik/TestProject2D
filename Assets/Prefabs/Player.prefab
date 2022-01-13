@@ -92,7 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b423f031e1e8e547bef2665ad4620b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Health: 5
 --- !u!1 &831105083
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,6 +969,8 @@ GameObject:
   - component: {fileID: 6520154581527658176}
   - component: {fileID: 1895084934837842273}
   - component: {fileID: 585648737}
+  - component: {fileID: 1396116710257699699}
+  - component: {fileID: 1621943286475456799}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1007,11 +1008,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BodyCollider: {fileID: 2421506243498306234}
   BodyRB: {fileID: 2421506243498306237}
-  m_JumpForce: 700
-  m_AdditionalJump: 1
-  m_GroundMask:
-    serializedVersion: 2
-    m_Bits: 64
   m_IsGrounded: 0
 --- !u!61 &2421506243498306234
 BoxCollider2D:
@@ -1139,6 +1135,30 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 6520154581527658176}
   _bindType: 0
+--- !u!114 &1396116710257699699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421506243498306233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d9941aedee9f2439faef50503245de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1621943286475456799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421506243498306233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6418f8b596ba64e4aa4fc387bdc16228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2421506243508133235
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,6 +2181,8 @@ GameObject:
   - component: {fileID: 2421506244365606424}
   - component: {fileID: 1148317490}
   - component: {fileID: 6623738382730466437}
+  - component: {fileID: 5617854571318487545}
+  - component: {fileID: 8594690942024658770}
   m_Layer: 8
   m_Name: Pistol
   m_TagString: Untagged
@@ -2247,7 +2269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnPoint: {fileID: 82009512}
-  ShootForce: 1000
 --- !u!114 &6623738382730466437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2266,6 +2287,30 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 6520154581527658176}
   _bindType: 0
+--- !u!114 &5617854571318487545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421506244365606422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10c27edda2d6af46a15829c3c9c5e31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8594690942024658770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421506244365606422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e1ed03ffd35794a8a10b3b654ccb79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2649017603537736853
 GameObject:
   m_ObjectHideFlags: 0
