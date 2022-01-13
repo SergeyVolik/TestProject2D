@@ -5,11 +5,12 @@ using Zenject;
 
 namespace TestProject
 {
-  
-    public class BloodEffect : BaseEffect
+
+
+
+    public class BulletCollistionEffect : BaseEffect
     {
-       
-        public class Factory : PlaceholderFactory<BloodEffect>
+        public class Factory : PlaceholderFactory<BulletCollistionEffect>
         {
             
         }

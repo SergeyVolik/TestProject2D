@@ -24,12 +24,10 @@ namespace TestProject
             if (m_TapManager.LeftScreenTap)
             {
                 m_LeftPlayer.Jump();
-                print("LeftScreenTap");
             }
             if (m_TapManager.RightScreenTap)
             {
                 m_RightPlayer.Jump();
-                print("RightScreenTap");
             }
         }
     }

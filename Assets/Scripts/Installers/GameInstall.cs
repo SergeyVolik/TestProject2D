@@ -27,6 +27,12 @@ namespace TestProject
 
         [SerializeField]
         BloodEffect m_BloodEffectPrefab;
+
+        [SerializeField]
+        MuzzleFlashEffect m_MuzzleFlashPrefab;
+
+        [SerializeField]
+        BulletCollistionEffect m_BulletCollisionEffect;
         public override void InstallBindings()
         {
             Container.Bind<Player>().WithId(Players.Player1).FromInstance(m_Player1).AsTransient();
@@ -34,16 +40,30 @@ namespace TestProject
 
             Container.Bind<TapManager>().FromInstance(Tap).AsSingle().NonLazy();
 
+            InstallVFXFactories();
+        }
 
+        private void InstallVFXFactories()
+        {
             Container.BindFactory<Bullet, Bullet.Factory>()
-               .FromComponentInNewPrefab(m_BulletPrefab)
-               .WithGameObjectName("Bullet")
-               .UnderTransformGroup("BulletsGroup");
+                .FromComponentInNewPrefab(m_BulletPrefab)
+                .WithGameObjectName("Bullet")
+                .UnderTransformGroup("BulletsGroup");
 
             Container.BindFactory<BloodEffect, BloodEffect.Factory>()
-             .FromComponentInNewPrefab(m_BloodEffectPrefab)
-             .WithGameObjectName("BloodEffect")
-             .UnderTransformGroup("BloodEffectGroup");
+                .FromComponentInNewPrefab(m_BloodEffectPrefab)
+                .WithGameObjectName("BloodEffect")
+                .UnderTransformGroup("BloodEffectGroup");
+
+            Container.BindFactory<MuzzleFlashEffect, MuzzleFlashEffect.Factory>()
+               .FromComponentInNewPrefab(m_MuzzleFlashPrefab)
+               .WithGameObjectName("MuzzleFlashEffect")
+               .UnderTransformGroup("MuzzleFlashEffectGroup");
+
+            Container.BindFactory<BulletCollistionEffect, BulletCollistionEffect.Factory>()
+               .FromComponentInNewPrefab(m_BulletCollisionEffect)
+               .WithGameObjectName("BulletCollisionEffect")
+               .UnderTransformGroup("BulletCollistionEffectGroup");
         }
     }
 }

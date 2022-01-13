@@ -5,16 +5,22 @@ using Zenject;
 
 namespace TestProject
 {
+
+    public interface IBullet : IDamageable
+    { 
+
+    }
+
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(SpriteRenderer))]
-    public class Bullet : MonoBehaviour
+    public class Bullet : MonoBehaviour, IBullet
     {
         Rigidbody2D m_Rg;
         public Rigidbody2D Rigidbody2D => m_Rg;
 
         BloodEffect.Factory m_BloodFactory;
-
+        BulletCollistionEffect.Factory m_BulletCollisionFactory;
 
         SpriteRenderer m_SpriteRenderer;
 
@@ -22,10 +28,10 @@ namespace TestProject
 
 
         [Inject]
-        void Construct(BloodEffect.Factory factory)
+        void Construct(BloodEffect.Factory factory, BulletCollistionEffect.Factory bulletCollisionFactory)
         {
             m_BloodFactory = factory;
-
+            m_BulletCollisionFactory = bulletCollisionFactory;
 
         }
 
@@ -48,16 +54,23 @@ namespace TestProject
 
                     head.TakeDamge(3);
 
-                    CreateEffect(collision);
+                    CreateBloodEffect(collision);
                     break;
                 case ILeg leg:
 
                     leg.TakeDamge(1);
-                    CreateEffect(collision);
+                    CreateBloodEffect(collision);
                     break;
                 case IChess chess:
                     chess.TakeDamge(2);
-                    CreateEffect(collision);
+                    CreateBloodEffect(collision);
+                    break;
+                case IBullet chess:
+                    var effect = m_BulletCollisionFactory.Create();
+                    effect.Play();
+                    effect.transform.position = collision.contacts[0].point;
+                    chess.TakeDamge(9999);
+                  
                     break;
 
             }
@@ -66,7 +79,7 @@ namespace TestProject
 
         }
 
-        void CreateEffect(Collision2D collision)
+        void CreateBloodEffect(Collision2D collision)
         {
             var effect = m_BloodFactory.Create();
             effect.transform.SetParent(collision.collider.transform);
@@ -76,6 +89,11 @@ namespace TestProject
             Debug.Log(m_Rg.velocity);
             effect.transform.rotation = Quaternion.Euler(effect.transform.eulerAngles.x, YRot, effect.transform.eulerAngles.z);
             effect.Play();
+        }
+
+        public void TakeDamge(int damage)
+        {
+            Destroy(gameObject);
         }
 
         public class Factory : PlaceholderFactory<Bullet>
