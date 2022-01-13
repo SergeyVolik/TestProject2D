@@ -7,35 +7,59 @@ namespace TestProject
 {
     public class Gun : MonoBehaviour
     {
-        Bullet.Factory m_Factory;
-        MuzzleFlashEffect.Factory m_MuzzleFlashFactory;
-        Player m_Player;
+
         [SerializeField]
         Transform m_SpawnPoint;
 
-        [SerializeField]
-        float ShootForce = 1000;
+        Bullet.Factory m_Factory;
+        Player m_Player;
+        ShootingSettigs m_ShootingSettigs;
+        SoundManager m_SoundsManager;
+        VFXManager m_VFXManager;
+
+        private bool m_CanShoot = true;
 
         [Inject]
-        void Construct(Bullet.Factory factory, MuzzleFlashEffect.Factory muzzleFlashFactory, Player player)
+        void Construct(
+             Bullet.Factory factory,
+             Player player,
+             ShootingSettigs settings,
+             SoundManager soundsManager,
+             VFXManager vfxManager)
         {
             m_Factory = factory;
             m_Player = player;
-            m_MuzzleFlashFactory = muzzleFlashFactory;
+            m_ShootingSettigs = settings;
+            m_SoundsManager = soundsManager;
+            m_VFXManager = vfxManager;
+
         }
 
         public void Shot()
         {
-            var bullet = m_Factory.Create();
-            bullet.transform.position = m_SpawnPoint.position;
+            if (m_CanShoot)
+            {
+                var bullet = m_Factory.Create();
+                bullet.transform.position = m_SpawnPoint.position;
 
-            if (m_Player.LookLeft)
-                bullet.SpriteRenderer.flipX = true;
+                if (m_Player.LookLeft)
+                    bullet.SpriteRenderer.flipX = true;
 
-            bullet.Rigidbody2D.AddForce(m_Player.LookDiraction * ShootForce);
-            var effect = m_MuzzleFlashFactory.Create();
-            effect.Play();
-            effect.transform.position = m_SpawnPoint.position;
+                bullet.Rigidbody2D.AddForce(m_Player.LookDiraction * m_ShootingSettigs.BulletSpeed);
+
+                m_VFXManager.PlayMuzzleEffectWithPos(m_SpawnPoint.position);
+                m_SoundsManager.PlayPistolShot();
+
+                StartCoroutine(WaiDelay());
+            }
+        }
+
+   
+        IEnumerator WaiDelay()
+        {
+            m_CanShoot = false;
+            yield return new WaitForSeconds(m_ShootingSettigs.DelayBetweenShots);
+            m_CanShoot = true;
         }
 
 

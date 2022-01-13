@@ -33,22 +33,51 @@ namespace TestProject
 
         [SerializeField]
         BulletCollistionEffect m_BulletCollisionEffect;
+
+        [SerializeField]
+        SoundShot m_SoundShotPrefab;
+
+        [SerializeField]
+        SoundManager m_SoundManager;
+
+        [SerializeField]
+        VFXManager m_VFXManager;
+
         public override void InstallBindings()
         {
             Container.Bind<Player>().WithId(Players.Player1).FromInstance(m_Player1).AsTransient();
             Container.Bind<Player>().WithId(Players.Player2).FromInstance(m_Player2).AsTransient();
 
             Container.Bind<TapManager>().FromInstance(Tap).AsSingle().NonLazy();
+            Container.Bind<SoundManager>().FromInstance(m_SoundManager).AsSingle().NonLazy();
+            Container.Bind<VFXManager>().FromInstance(m_VFXManager).AsSingle().NonLazy();
+
+            InstallBulletFactory();
 
             InstallVFXFactories();
+
+            InstallSoundShotFactory();
+        }
+
+        private void InstallBulletFactory()
+        {
+            Container.BindFactory<Bullet, Bullet.Factory>()
+            .FromComponentInNewPrefab(m_BulletPrefab)
+            .WithGameObjectName("Bullet")
+            .UnderTransformGroup("BulletsGroup");
+        }
+
+        private void InstallSoundShotFactory()
+        {
+            Container.BindFactory<SoundShot, SoundShot.Factory>()
+               .FromComponentInNewPrefab(m_SoundShotPrefab)
+               .WithGameObjectName("SoundShot")
+               .UnderTransformGroup("SoundShotGroup");
         }
 
         private void InstallVFXFactories()
         {
-            Container.BindFactory<Bullet, Bullet.Factory>()
-                .FromComponentInNewPrefab(m_BulletPrefab)
-                .WithGameObjectName("Bullet")
-                .UnderTransformGroup("BulletsGroup");
+        
 
             Container.BindFactory<BloodEffect, BloodEffect.Factory>()
                 .FromComponentInNewPrefab(m_BloodEffectPrefab)

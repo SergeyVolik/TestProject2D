@@ -16,23 +16,23 @@ namespace TestProject
     [RequireComponent(typeof(SpriteRenderer))]
     public class Bullet : MonoBehaviour, IBullet
     {
-        Rigidbody2D m_Rg;
-        public Rigidbody2D Rigidbody2D => m_Rg;
-
-        BloodEffect.Factory m_BloodFactory;
-        BulletCollistionEffect.Factory m_BulletCollisionFactory;
-
-        SpriteRenderer m_SpriteRenderer;
-
+        private Rigidbody2D m_Rg;
+        private SpriteRenderer m_SpriteRenderer;
+        private ShootingSettigs m_ShootingSettigs;
+        private SoundManager m_SoundsManager;
+        private VFXManager m_VFXManager;
         public SpriteRenderer SpriteRenderer => m_SpriteRenderer;
-
-
+        public Rigidbody2D Rigidbody2D => m_Rg;
         [Inject]
-        void Construct(BloodEffect.Factory factory, BulletCollistionEffect.Factory bulletCollisionFactory)
+        void Construct(
+            ShootingSettigs settings,
+            SoundManager soundsManager,
+            VFXManager vfxManager
+            )
         {
-            m_BloodFactory = factory;
-            m_BulletCollisionFactory = bulletCollisionFactory;
-
+            m_ShootingSettigs = settings;
+            m_SoundsManager = soundsManager;
+            m_VFXManager = vfxManager;
         }
 
         private void Awake()
@@ -52,23 +52,23 @@ namespace TestProject
             {
                 case IHead head:
 
-                    head.TakeDamge(3);
+                    head.TakeDamge(m_ShootingSettigs.HeadDamage);
 
                     CreateBloodEffect(collision);
                     break;
                 case ILeg leg:
 
-                    leg.TakeDamge(1);
+                    leg.TakeDamge(m_ShootingSettigs.LegDamage);
                     CreateBloodEffect(collision);
                     break;
                 case IChess chess:
-                    chess.TakeDamge(2);
+                    chess.TakeDamge(m_ShootingSettigs.ChessDamage);
                     CreateBloodEffect(collision);
                     break;
                 case IBullet chess:
-                    var effect = m_BulletCollisionFactory.Create();
-                    effect.Play();
-                    effect.transform.position = collision.contacts[0].point;
+
+                    m_VFXManager.PlayBulletCollision(collision.contacts[0].point);
+
                     chess.TakeDamge(9999);
                   
                     break;
@@ -81,18 +81,14 @@ namespace TestProject
 
         void CreateBloodEffect(Collision2D collision)
         {
-            var effect = m_BloodFactory.Create();
-            effect.transform.SetParent(collision.collider.transform);
-            effect.transform.position = collision.contacts[0].point;
-
             float YRot = SpriteRenderer.flipX ? 90 : -90;
-            Debug.Log(m_Rg.velocity);
-            effect.transform.rotation = Quaternion.Euler(effect.transform.eulerAngles.x, YRot, effect.transform.eulerAngles.z);
-            effect.Play();
+            m_VFXManager.PlayBloodEffect(YRot, collision.collider.transform, collision.contacts[0].point);
+
         }
 
         public void TakeDamge(int damage)
         {
+            m_SoundsManager.PlayBulletCollistion();
             Destroy(gameObject);
         }
 

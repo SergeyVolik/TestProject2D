@@ -2,17 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class HealthHandler : MonoBehaviour
+namespace TestProject
 {
-    [SerializeField]
-    private int m_Health = 5;
-
-    public int Health => m_Health;
-    public event Action OnDamageTaken;
-    public void TakeDamage(int damage)
+    public class HealthHandler : MonoBehaviour
     {
-        m_Health -= damage;
-        OnDamageTaken.Invoke();
+        private int m_Health = 5;
+        PlayerSettings m_Settings;
+
+        public int Health => m_Health;
+        public event Action OnDamageTaken;       
+
+        [Inject]
+        void Construct(PlayerSettings settings)
+        {
+            m_Settings = settings;
+            m_Health = m_Settings.MaxHealth;
+        }
+
+
+        public void TakeDamage(int damage)
+        {
+            m_Health -= damage;
+            OnDamageTaken.Invoke();
+        }
     }
 }

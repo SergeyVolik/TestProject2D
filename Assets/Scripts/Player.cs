@@ -9,44 +9,35 @@ namespace TestProject
     public class Player : MonoBehaviour
     {
         [SerializeField]
-        BoxCollider2D BodyCollider;
+        private BoxCollider2D BodyCollider;
         [SerializeField]
-        Rigidbody2D BodyRB;
+        private Rigidbody2D BodyRB;
+        [SerializeField]
+        private bool m_IsGrounded = false;
 
-        [SerializeField]
-        float m_JumpForce = 5f;
-        [SerializeField]
-        int m_AdditionalJump = 1;
         private int m_CurrentJump;
-
-
-
-
-        [SerializeField]
-        LayerMask m_GroundMask;
-
-        [SerializeField]
-        bool m_IsGrounded = false;
-
-        HealthHandler m_HealthHandler;
-
-        Gun m_Gun;
-
-        [Inject]
-        void Construct(HealthHandler healthHandler, Gun gun)
-        {
-            m_HealthHandler = healthHandler;
-            m_Gun = gun;
-        }
+        private HealthHandler m_HealthHandler;
+        private Gun m_Gun;
+        private PlayerSettings PlayerSettings;
 
         public Vector2 LookDiraction => transform.rotation.eulerAngles.y == 180 ? Vector2.left : Vector2.right;
         public bool LookLeft => transform.rotation.eulerAngles.y == 180 ? true : false;
         public bool IsGrounded => m_IsGrounded;
 
         public event Action OnJumped;
-        bool CheckGrounded()
+
+
+        [Inject]
+        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings)
         {
-            return Physics2D.Raycast(BodyCollider.bounds.center, Vector2.down, BodyCollider.bounds.extents.y + .1f, m_GroundMask);
+            m_HealthHandler = healthHandler;
+            m_Gun = gun;
+            PlayerSettings = settings;
+        }
+
+        private bool CheckGrounded()
+        {
+            return Physics2D.Raycast(BodyCollider.bounds.center, Vector2.down, BodyCollider.bounds.extents.y + .1f, PlayerSettings.GoundMask);
         }
 
         private void Update()
@@ -60,11 +51,11 @@ namespace TestProject
 
         public void Jump()
         {
-            if (m_CurrentJump < m_AdditionalJump)
+            if (m_CurrentJump < PlayerSettings.AdditionalJumps)
             {
                 m_CurrentJump++;
                 BodyRB.velocity = new Vector2(BodyRB.velocity.x, 0);
-                BodyRB.AddForce(Vector2.up * m_JumpForce);
+                BodyRB.AddForce(Vector2.up * PlayerSettings.JumpForce);
                 OnJumped.Invoke();
             }
         }
