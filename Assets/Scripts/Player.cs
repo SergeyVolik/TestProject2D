@@ -26,13 +26,30 @@ namespace TestProject
 
         public event Action OnJumped;
 
+        SoundManager m_SoundManager;
 
         [Inject]
-        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings)
+        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings, SoundManager soundManager)
         {
             m_HealthHandler = healthHandler;
             m_Gun = gun;
             PlayerSettings = settings;
+            m_SoundManager = soundManager;
+        }
+
+        private void OnEnable()
+        {
+            m_HealthHandler.OnDamageTaken += DamageTaken;
+        }
+
+        private void OnDisable()
+        {
+            m_HealthHandler.OnDamageTaken -= DamageTaken;
+        }
+
+        void DamageTaken()
+        {
+            m_SoundManager.PlayHitSound();
         }
 
         private bool CheckGrounded()
