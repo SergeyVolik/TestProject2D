@@ -30,12 +30,17 @@ namespace TestProject
 
         HealthHandler m_HealthHandler;
 
+        Gun m_Gun;
+
         [Inject]
-        void Construct(HealthHandler healthHandler)
+        void Construct(HealthHandler healthHandler, Gun gun)
         {
             m_HealthHandler = healthHandler;
+            m_Gun = gun;
         }
 
+        public Vector2 LookDiraction => transform.rotation.eulerAngles.y == 180 ? Vector2.left : Vector2.right;
+        public bool LookLeft => transform.rotation.eulerAngles.y == 180 ? true : false;
         public bool IsGrounded => m_IsGrounded;
 
         public event Action OnJumped;
@@ -63,6 +68,11 @@ namespace TestProject
                 BodyRB.AddForce(Vector2.up * m_JumpForce);
                 OnJumped.Invoke();
             }
+        }
+
+        public void Shot()
+        {
+            m_Gun.Shot();
         }
     }
 

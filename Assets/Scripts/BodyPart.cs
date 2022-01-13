@@ -15,8 +15,7 @@ namespace TestProject
         void Construct(HealthHandler health)
         {
             m_Health = health;
-            Debug.Log($"BodyPart construct {m_Health.Health}");
-            
+    
         }
     }
 }
