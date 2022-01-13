@@ -29,6 +29,25 @@ namespace TestProject
             {
                 m_RightPlayer.Jump();
             }
+
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                m_LeftPlayer.Shot();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                m_LeftPlayer.Jump();
+            }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                m_RightPlayer.Shot();
+            }
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                m_RightPlayer.Jump();
+            }
+#endif
         }
     }
 
