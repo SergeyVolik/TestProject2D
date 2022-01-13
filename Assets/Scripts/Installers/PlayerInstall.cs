@@ -6,15 +6,15 @@ using Zenject;
 namespace TestProject
 {
 
-    public class GameInstall : MonoInstaller
+    public class PlayerInstall : MonoInstaller
     {
-        [SerializeField]
-        TapManager Tap;
+
+        Gun m_Gun;
 
         public override void InstallBindings()
         {
-
-            Container.Bind<TapManager>().FromInstance(Tap).AsSingle();
+            
+           
         }
     }
 }

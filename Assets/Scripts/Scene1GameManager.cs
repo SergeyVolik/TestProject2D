@@ -5,20 +5,18 @@ using Zenject;
 
 namespace TestProject
 {
-    public class GameManager : MonoBehaviour
+    public class Scene1GameManager : MonoBehaviour
     {
-
+        [Inject]
         TapManager m_TapManager;
 
-        [SerializeField]
+        [Inject(Id = Players.Player1)]
         private Player m_LeftPlayer;
 
-        [Inject]
-        void Construct(TapManager tap)
-        {
-            m_TapManager = tap;
-        }
-    
+        [Inject(Id = Players.Player2)]
+        private Player m_RightPlayer;
+
+
 
         // Update is called once per frame
         void Update()
@@ -26,10 +24,11 @@ namespace TestProject
             if (m_TapManager.LeftScreenTap)
             {
                 m_LeftPlayer.Jump();
-                print("LeftScreenTap");   
+                print("LeftScreenTap");
             }
             if (m_TapManager.RightScreenTap)
             {
+                m_RightPlayer.Jump();
                 print("RightScreenTap");
             }
         }
