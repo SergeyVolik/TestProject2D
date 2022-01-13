@@ -59,6 +59,7 @@ namespace TestProject
             {
                 m_CurrentJump++;
                 print("Jump");
+                BodyRB.velocity = new Vector2(BodyRB.velocity.x, 0);
                 BodyRB.AddForce(Vector2.up * m_JumpForce);
                 OnJumped.Invoke();
             }
