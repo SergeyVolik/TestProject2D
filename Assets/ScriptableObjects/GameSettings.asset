@@ -29,3 +29,9 @@ MonoBehaviour:
       m_Bits: 64
     AdditionalJumps: 1
     JumpForce: 600
+  BonusSettings:
+    Bomb:
+      timeToExplosion: 5
+    AidKit:
+      MaxHealth: 10
+      HealthStrength: 2

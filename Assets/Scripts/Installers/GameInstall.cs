@@ -70,7 +70,7 @@ namespace TestProject
             Container.Bind<UiManager>().FromInstance(m_Ui).AsSingle().NonLazy();
             Container.Bind<BonusSpawner>().FromInstance(m_BonusSpawner).AsSingle().NonLazy();
 
-            Container.BindInterfacesTo<Scene1GameManager>().AsSingle().NonLazy();
+            Container.BindInterfacesTo<JumpManager>().AsSingle().NonLazy();
             Container.BindInterfacesTo<DebugManager>().AsSingle().NonLazy();
 
             InstallBulletFactory();

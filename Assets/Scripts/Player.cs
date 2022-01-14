@@ -6,7 +6,7 @@ using Zenject;
 
 namespace TestProject
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IHealable
     {
         [SerializeField]
         private BoxCollider2D BodyCollider;
@@ -32,10 +32,12 @@ namespace TestProject
         private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings)
         {
             m_HealthHandler = healthHandler;
+            m_HealthHandler.Health = settings.MaxHealth;
+          
+            healthHandler.MaxHealth = settings.MaxHealth;
             m_Gun = gun;
             PlayerSettings = settings;
         }
-
 
         private bool CheckGrounded()
         {
@@ -65,6 +67,11 @@ namespace TestProject
         public void Shot()
         {
             m_Gun.Shot();
+        }
+
+        public void Heal(int value)
+        {
+            m_HealthHandler.Heal(value);
         }
     }
 

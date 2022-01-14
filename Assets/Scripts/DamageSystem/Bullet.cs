@@ -20,6 +20,8 @@ namespace TestProject
         private Rigidbody2D m_Rg;
         private SpriteRenderer m_SpriteRenderer;
         private ShootingSettigs m_ShootingSettigs;
+        public Player Owner;
+
         public SpriteRenderer SpriteRenderer => m_SpriteRenderer;
         public Rigidbody2D Rigidbody2D => m_Rg;
 
@@ -45,27 +47,32 @@ namespace TestProject
         {
             var IDamageable = collision.gameObject.GetComponent<IDamageable>();
 
-            bool YRot = SpriteRenderer.flipX ? true : false;
+            bool fromLeft = SpriteRenderer.flipX ? true : false;
 
             switch (IDamageable)
             {
                 case IHead head:
 
-                    head.TakeDamge(m_ShootingSettigs.HeadDamage, collision, YRot);
+                    head.TakeDamge(m_ShootingSettigs.HeadDamage, collision, fromLeft);
                     break;
                 case ILeg leg:
 
-                    leg.TakeDamge(m_ShootingSettigs.LegDamage, collision, YRot);
+                    leg.TakeDamge(m_ShootingSettigs.LegDamage, collision, fromLeft);
 
                     break;
                 case IChess chess:
-                    chess.TakeDamge(m_ShootingSettigs.ChessDamage, collision, YRot);
+                    chess.TakeDamge(m_ShootingSettigs.ChessDamage, collision, fromLeft);
                     break;
                 case IBullet chess:
 
 
-                    chess.TakeDamge(9999, collision, YRot);
+                    chess.TakeDamge(9999, collision, fromLeft);
 
+                    break;
+
+                default:
+                    if (IDamageable != null)
+                        IDamageable.TakeDamge(1, collision, fromLeft);
                     break;
 
             }

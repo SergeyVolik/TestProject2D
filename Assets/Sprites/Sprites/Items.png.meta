@@ -4,31 +4,31 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 8033092973025764044
-    second: Items_0
+    second: Heart
   - first:
       213: 4337684191699249041
-    second: Items_1
+    second: Gun
   - first:
       213: -488721925442295091
-    second: Items_2
+    second: Bullet
   - first:
       213: -7573354855677281409
-    second: Items_3
+    second: roket
   - first:
       213: 1801263428120863714
-    second: Items_4
+    second: Bomb
   - first:
       213: -5971942374765049077
-    second: Items_5
+    second: bazucaItem
   - first:
       213: 4639506938558671751
-    second: Items_6
+    second: FirstAidKit
   - first:
       213: -6099050445329199328
-    second: Items_7
+    second: bazucaPack
   - first:
       213: -7855203551248514480
-    second: Items_8
+    second: ShieldKit
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,7 +130,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Items_0
+      name: Heart
       rect:
         serializedVersion: 2
         x: 0
@@ -138,7 +138,7 @@ TextureImporter:
         width: 253
         height: 215
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -151,7 +151,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_1
+      name: Gun
       rect:
         serializedVersion: 2
         x: 312
@@ -159,7 +159,7 @@ TextureImporter:
         width: 371
         height: 197
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -172,7 +172,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_2
+      name: Bullet
       rect:
         serializedVersion: 2
         x: 0
@@ -180,7 +180,7 @@ TextureImporter:
         width: 212
         height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -193,15 +193,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_3
+      name: roket
       rect:
         serializedVersion: 2
         x: 0
-        y: 390
+        y: 391
         width: 352
         height: 244
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -214,7 +214,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_4
+      name: Bomb
       rect:
         serializedVersion: 2
         x: 740
@@ -222,7 +222,7 @@ TextureImporter:
         width: 284
         height: 371
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -235,7 +235,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_5
+      name: bazucaItem
       rect:
         serializedVersion: 2
         x: 397
@@ -243,7 +243,7 @@ TextureImporter:
         width: 543
         height: 229
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -256,7 +256,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_6
+      name: FirstAidKit
       rect:
         serializedVersion: 2
         x: 0
@@ -264,7 +264,7 @@ TextureImporter:
         width: 341
         height: 342
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -277,7 +277,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_7
+      name: bazucaPack
       rect:
         serializedVersion: 2
         x: 695
@@ -285,7 +285,7 @@ TextureImporter:
         width: 329
         height: 339
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -298,7 +298,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_8
+      name: ShieldKit
       rect:
         serializedVersion: 2
         x: 343
@@ -306,7 +306,7 @@ TextureImporter:
         width: 349
         height: 341
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

@@ -36,10 +36,18 @@ namespace TestProject
     {
         public BombSettings Bomb;
 
+        public FirstAidKitSettings AidKit;
         [Serializable]
         public class BombSettings
         {
             public int timeToExplosion = 5;
+        }
+
+        [Serializable]
+        public class FirstAidKitSettings
+        {
+            public int MaxHealth = 10;
+            public int HealthStrength;
         }
     }
 

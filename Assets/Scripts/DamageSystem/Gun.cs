@@ -47,6 +47,7 @@ namespace TestProject
                     bullet.SpriteRenderer.flipX = true;
 
                 bullet.Rigidbody2D.AddForce(m_Player.LookDiraction * m_ShootingSettigs.BulletSpeed);
+                bullet.Owner = m_Player;
 
                 StartCoroutine(WaiDelay());
 

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace TestProject
 {
-    public class Scene1GameManager : ITickable
+    public class JumpManager : ITickable
     {
         [Inject]
         TapManager m_TapManager;
