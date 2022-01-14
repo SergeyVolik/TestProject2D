@@ -26,10 +26,11 @@ namespace TestProject
 
         public event Action OnJumped;
 
-    
+
+        BodyShield m_Shield;
 
         [Inject]
-        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings)
+        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings, BodyShield shield)
         {
             m_HealthHandler = healthHandler;
             m_HealthHandler.Health = settings.MaxHealth;
@@ -37,6 +38,7 @@ namespace TestProject
             healthHandler.MaxHealth = settings.MaxHealth;
             m_Gun = gun;
             PlayerSettings = settings;
+            m_Shield = shield;
         }
 
         private bool CheckGrounded()
@@ -77,6 +79,11 @@ namespace TestProject
         public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
         {
             m_HealthHandler.TakeDamge(damage, collision, fromLeft);
+        }
+
+        public void ActivateShield()
+        {
+            m_Shield.Activate();
         }
     }
 

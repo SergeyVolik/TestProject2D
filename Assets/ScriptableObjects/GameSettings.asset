@@ -33,6 +33,10 @@ MonoBehaviour:
   BonusSettings:
     Bomb:
       timeToExplosion: 5
+    Shield:
+      duration: 5
+      size: 5
+      color: {r: 1, g: 0.9949241, b: 0, a: 1}
     AidKit:
       MaxHealth: 10
       HealthStrength: 2

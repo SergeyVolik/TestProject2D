@@ -36,12 +36,21 @@ namespace TestProject
     public class BonusSettings
     {
         public BombSettings Bomb;
-
+        public ShieldSettings Shield;
         public FirstAidKitSettings AidKit;
+
+
         [Serializable]
         public class BombSettings
         {
             public int timeToExplosion = 5;
+        }
+        [Serializable]
+        public class ShieldSettings
+        {
+            public int duration = 5;
+            public float size = 5;
+            public Color color;
         }
 
         [Serializable]
