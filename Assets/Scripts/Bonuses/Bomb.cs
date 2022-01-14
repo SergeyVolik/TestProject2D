@@ -11,14 +11,14 @@ namespace TestProject
     {
         [SerializeField]
         private TextMesh m_TimerText;
-        private BonusSettings m_Settings;
+        private BonusSettings.BombSettings m_Settings;
 
         public event Action<Vector2> OnExploded;
 
         [Inject]
         void Construct(BonusSettings settings)
         {
-            m_Settings = settings;
+            m_Settings = settings.Bomb;
         }
 
         private void Awake()
@@ -28,7 +28,7 @@ namespace TestProject
 
         IEnumerator Timer()
         {
-            var time = m_Settings.Bomb.timeToExplosion;
+            var time = m_Settings.timeToExplosion;
 
             while (time > 0)
             {
@@ -39,11 +39,32 @@ namespace TestProject
             }
 
             Debug.Log("Boom!");
-            OnExploded?.Invoke(transform.position);
-            Destroy(gameObject);
 
+
+            Explode();
 
         }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+
+            if (collision.collider.TryGetComponent<Player>(out var player))
+            {
+               
+                Explode();
+            }
+        }
+
+        private void Explode()
+        {
+            Physics2D.OverlapCircleAll(transform.position, 2);
+
+            OnExploded?.Invoke(transform.position);
+
+            Destroy(gameObject);
+        }
+
+
 
         public class Factory : PlaceholderFactory<Bomb> { }
 

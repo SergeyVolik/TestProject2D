@@ -23,11 +23,7 @@ namespace TestProject
 
         public void Tick()
         {
-            if (Input.GetKeyDown(KeyCode.F5))
-            {
-                m_Spawner.SpawnBomb();
-
-            }
+           
 
             if (Input.GetKeyDown(KeyCode.F1))
             {
@@ -44,6 +40,17 @@ namespace TestProject
             if (Input.GetKeyDown(KeyCode.F4))
             {
                 m_RightPlayer.Jump();
+            }
+
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                m_Spawner.SpawnBomb();
+
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                m_Spawner.SpawnFirstAidKit();
+
             }
 
         }

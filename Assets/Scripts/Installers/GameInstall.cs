@@ -57,6 +57,8 @@ namespace TestProject
         [SerializeField]
         Bomb m_BombPrefab;
         [SerializeField]
+        FirstAidKit m_FirstAidKitPrefab;
+        [SerializeField]
         BonusSpawner m_BonusSpawner;
 
         public override void InstallBindings()
@@ -88,6 +90,11 @@ namespace TestProject
                .FromComponentInNewPrefab(m_BombPrefab)
                .WithGameObjectName("Bomb")
                .UnderTransformGroup("BombGroup");
+
+            Container.BindFactory<FirstAidKit, FirstAidKit.Factory>()
+              .FromComponentInNewPrefab(m_FirstAidKitPrefab)
+              .WithGameObjectName("FirstAidKit")
+              .UnderTransformGroup("FirstAidKitGroup");
         }
 
         private void InstallBulletFactory()

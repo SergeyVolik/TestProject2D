@@ -6,7 +6,7 @@ using Zenject;
 
 namespace TestProject
 {
-    public class Player : MonoBehaviour, IHealable
+    public class Player : MonoBehaviour, IHealable, IDamageable
     {
         [SerializeField]
         private BoxCollider2D BodyCollider;
@@ -72,6 +72,11 @@ namespace TestProject
         public void Heal(int value)
         {
             m_HealthHandler.Heal(value);
+        }
+
+        public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
+        {
+            m_HealthHandler.TakeDamge(damage, collision, fromLeft);
         }
     }
 

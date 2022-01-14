@@ -29,6 +29,7 @@ namespace TestProject
         public SFXSettingsSO HitSFX;
         public SFXSettingsSO BulletCollisionSFX;
         public SFXSettingsSO ShotSFX;
+        public SFXSettingsSO ExplosionSFX;
     }
 
     [Serializable]

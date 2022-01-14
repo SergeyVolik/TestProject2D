@@ -44,6 +44,8 @@ namespace TestProject
 
         }
 
+        public class Factory : PlaceholderFactory<FirstAidKit> { }
+
     }
 
 }

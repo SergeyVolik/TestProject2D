@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8314889143585186656}
   - component: {fileID: 8314889143585186658}
   - component: {fileID: 8314889143585186659}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,8 @@ GameObject:
   - component: {fileID: 528924346}
   - component: {fileID: 528924352}
   - component: {fileID: 528924353}
-  m_Layer: 0
+  - component: {fileID: 7134827791518194038}
+  m_Layer: 7
   m_Name: BombBonus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,3 +282,15 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
+--- !u!114 &7134827791518194038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8314889143638173456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cbe2ef6cd932945882c813619721b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

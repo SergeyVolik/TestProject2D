@@ -16,6 +16,7 @@ MonoBehaviour:
     HitSFX: {fileID: 11400000, guid: 2d38c3b091ed28745bbac9a97a299998, type: 2}
     BulletCollisionSFX: {fileID: 11400000, guid: b3c56665ac2499d42ab0afd87cb01133, type: 2}
     ShotSFX: {fileID: 11400000, guid: 30f2e144b3b46064380e24b05212b798, type: 2}
+    ExplosionSFX: {fileID: 11400000, guid: 262997035ff5bdc41852bd2b4bc15af4, type: 2}
   ShootingSettigs:
     BulletSpeed: 1000
     DelayBetweenShots: 0.5
