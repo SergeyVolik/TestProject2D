@@ -59,6 +59,8 @@ namespace TestProject
         [SerializeField]
         FirstAidKit m_FirstAidKitPrefab;
         [SerializeField]
+        ShieldBuster m_ShieldPrefab;
+        [SerializeField]
         BonusSpawner m_BonusSpawner;
 
         public override void InstallBindings()
@@ -92,9 +94,14 @@ namespace TestProject
                .UnderTransformGroup("BombGroup");
 
             Container.BindFactory<FirstAidKit, FirstAidKit.Factory>()
-              .FromComponentInNewPrefab(m_FirstAidKitPrefab)
-              .WithGameObjectName("FirstAidKit")
-              .UnderTransformGroup("FirstAidKitGroup");
+                .FromComponentInNewPrefab(m_FirstAidKitPrefab)
+                .WithGameObjectName("FirstAidKit")
+                .UnderTransformGroup("FirstAidKitGroup");
+
+            Container.BindFactory<ShieldBuster, ShieldBuster.Factory>()
+                .FromComponentInNewPrefab(m_ShieldPrefab)
+                .WithGameObjectName("ShieldBuster")
+                .UnderTransformGroup("ShieldBusterGroup");
         }
 
         private void InstallBulletFactory()

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ship
   - asteroid
+  - player1
+  - player2
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - Projectile
   - ProjectileIgnore
   - Shield
-  - Player
-  - 
+  - Player1
+  - Player2
   - 
   - 
   - 

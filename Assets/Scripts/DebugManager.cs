@@ -53,6 +53,12 @@ namespace TestProject
 
             }
 
+            if (Input.GetKeyDown(KeyCode.F7))
+            {
+                m_Spawner.SpawnShieldBuster();
+
+            }
+
         }
 
     }

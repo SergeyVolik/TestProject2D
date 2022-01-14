@@ -11,6 +11,7 @@ namespace TestProject
 
         [SerializeField]
         Transform m_SpawnPoint;
+        
 
         Bullet.Factory m_Factory;
         Player m_Player;

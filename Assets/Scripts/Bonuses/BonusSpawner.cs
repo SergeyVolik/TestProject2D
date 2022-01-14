@@ -13,12 +13,14 @@ namespace TestProject
 
         Bomb.Factory m_BombFactory;
         FirstAidKit.Factory m_FIKFactory;
+        ShieldBuster.Factory m_ShieldBusterFactory;
 
-       [Inject]
-        void Construct(Bomb.Factory bombFactory, FirstAidKit.Factory fikFactory)
+        [Inject]
+        void Construct(Bomb.Factory bombFactory, FirstAidKit.Factory fikFactory, ShieldBuster.Factory shieldBusterFactory)
         {
             m_BombFactory = bombFactory;
             m_FIKFactory = fikFactory;
+            m_ShieldBusterFactory = shieldBusterFactory;
         }
 
 
@@ -33,6 +35,14 @@ namespace TestProject
         public void SpawnFirstAidKit()
         {
             var fik = m_FIKFactory.Create();
+            fik.transform.position = m_SpawnPoint.position;
+
+
+        }
+
+        public void SpawnShieldBuster()
+        {
+            var fik = m_ShieldBusterFactory.Create();
             fik.transform.position = m_SpawnPoint.position;
 
 

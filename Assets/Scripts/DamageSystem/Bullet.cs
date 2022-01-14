@@ -63,10 +63,10 @@ namespace TestProject
                 case IChess chess:
                     chess.TakeDamge(m_ShootingSettigs.ChessDamage, collision, fromLeft);
                     break;
-                case IBullet chess:
+                case IBullet bullet:
 
 
-                    chess.TakeDamge(9999, collision, fromLeft);
+                    bullet.TakeDamge(9999, collision, fromLeft);
 
                     break;
 
@@ -79,6 +79,26 @@ namespace TestProject
 
             Destroy(gameObject);
 
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+
+            if (!collision.CompareTag(Owner.tag))
+            {
+                TakeDamageInternal();
+            }
+
+          
+        }
+
+        private void TakeDamageInternal()
+        {
+
+                OnBulletCollision?.Invoke(transform.position);
+
+
+            StartCoroutine(WainAndDestory());
         }
 
 

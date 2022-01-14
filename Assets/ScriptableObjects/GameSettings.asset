@@ -36,7 +36,7 @@ MonoBehaviour:
     Shield:
       duration: 5
       size: 5
-      color: {r: 1, g: 0.9949241, b: 0, a: 1}
+      color: {r: 0, g: 0.033422947, b: 1, a: 1}
     AidKit:
       MaxHealth: 10
       HealthStrength: 2

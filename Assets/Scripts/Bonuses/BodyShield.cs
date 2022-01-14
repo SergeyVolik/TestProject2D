@@ -22,6 +22,8 @@ namespace TestProject
             m_SR = GetComponent<SpriteRenderer>();
             m_SR.color = m_ShieldSettins.color;
             m_SR.transform.localScale = new Vector3(m_ShieldSettins.size, m_ShieldSettins.size, m_ShieldSettins.size);
+
+            gameObject.SetActive(false);
         }
 
         public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
