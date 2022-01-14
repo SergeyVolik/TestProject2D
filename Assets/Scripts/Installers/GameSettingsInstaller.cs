@@ -11,12 +11,13 @@ namespace TestProject
         public GameSounds Sounds;
         public ShootingSettigs ShootingSettigs;
         public PlayerSettings PlayerSettings;
-
+        public BonusSettings BonusSettings;
         public override void InstallBindings()
         {
             Container.BindInstance(Sounds);
             Container.BindInstance(ShootingSettigs);
             Container.BindInstance(PlayerSettings);
+            Container.BindInstance(BonusSettings);
         }
 
 
@@ -28,6 +29,18 @@ namespace TestProject
         public SFXSettingsSO HitSFX;
         public SFXSettingsSO BulletCollisionSFX;
         public SFXSettingsSO ShotSFX;
+    }
+
+    [Serializable]
+    public class BonusSettings
+    {
+        public BombSettings Bomb;
+
+        [Serializable]
+        public class BombSettings
+        {
+            public int timeToExplosion = 5;
+        }
     }
 
     [Serializable]

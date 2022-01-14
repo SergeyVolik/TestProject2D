@@ -5,7 +5,7 @@ using Zenject;
 
 namespace TestProject
 {
-    public class Scene1GameManager : MonoBehaviour
+    public class Scene1GameManager : ITickable
     {
         [Inject]
         TapManager m_TapManager;
@@ -16,10 +16,7 @@ namespace TestProject
         [Inject(Id = Players.Player2)]
         private Player m_RightPlayer;
 
-
-
-        // Update is called once per frame
-        void Update()
+        public void Tick()
         {
             if (m_TapManager.LeftScreenTap)
             {
@@ -29,26 +26,9 @@ namespace TestProject
             {
                 m_RightPlayer.Jump();
             }
-
-#if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                m_LeftPlayer.Shot();
-            }
-            if (Input.GetKeyDown(KeyCode.F2))
-            {
-                m_LeftPlayer.Jump();
-            }
-            if (Input.GetKeyDown(KeyCode.F3))
-            {
-                m_RightPlayer.Shot();
-            }
-            if (Input.GetKeyDown(KeyCode.F4))
-            {
-                m_RightPlayer.Jump();
-            }
-#endif
         }
+
+
     }
 
 }

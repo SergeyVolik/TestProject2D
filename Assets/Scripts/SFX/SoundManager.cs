@@ -5,12 +5,12 @@ using Zenject;
 
 namespace TestProject
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManager
     {
         SoundShot.Factory m_Factory;
         GameSounds m_Sounds;
-        [Inject]
-        void Construct(SoundShot.Factory factory, GameSounds sounds)
+
+        public SoundManager(SoundShot.Factory factory, GameSounds sounds)
         {
             m_Factory = factory;
             m_Sounds = sounds;

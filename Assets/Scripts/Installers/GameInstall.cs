@@ -14,8 +14,8 @@ namespace TestProject
 
     public class GameInstall : MonoInstaller
     {
-        [SerializeField]
-        TapManager Tap;
+
+        [Header("Gameplay")]
 
         [SerializeField]
         Player m_Player1;
@@ -24,6 +24,9 @@ namespace TestProject
 
         [SerializeField]
         Bullet m_BulletPrefab;
+
+        [Header("Effects")]
+
 
         [SerializeField]
         BloodEffect m_BloodEffectPrefab;
@@ -35,31 +38,56 @@ namespace TestProject
         BulletCollistionEffect m_BulletCollisionEffect;
 
         [SerializeField]
+        ExplosionEffect m_ExplosionEffectPrefab;
+
+        [Header("Sound")]
+        [SerializeField]
         SoundShot m_SoundShotPrefab;
 
-        [SerializeField]
-        SoundManager m_SoundManager;
 
-        [SerializeField]
-        VFXManager m_VFXManager;
 
+        [Header("UI managers")]
         [SerializeField]
         UiManager m_Ui;
+
+        [SerializeField]
+        TapManager Tap;
+
+        [Header("Bonus prefabs")]
+        [SerializeField]
+        Bomb m_BombPrefab;
+        [SerializeField]
+        BonusSpawner m_BonusSpawner;
+
         public override void InstallBindings()
         {
             Container.Bind<Player>().WithId(Players.Player1).FromInstance(m_Player1).AsTransient();
             Container.Bind<Player>().WithId(Players.Player2).FromInstance(m_Player2).AsTransient();
 
             Container.Bind<TapManager>().FromInstance(Tap).AsSingle().NonLazy();
-            Container.Bind<SoundManager>().FromInstance(m_SoundManager).AsSingle().NonLazy();
-            Container.Bind<VFXManager>().FromInstance(m_VFXManager).AsSingle().NonLazy();
+            Container.Bind<SoundManager>().AsSingle().NonLazy();
+            Container.Bind<VFXManager>().AsSingle().NonLazy();
             Container.Bind<UiManager>().FromInstance(m_Ui).AsSingle().NonLazy();
+            Container.Bind<BonusSpawner>().FromInstance(m_BonusSpawner).AsSingle().NonLazy();
+
+            Container.BindInterfacesTo<Scene1GameManager>().AsSingle().NonLazy();
+            Container.BindInterfacesTo<DebugManager>().AsSingle().NonLazy();
 
             InstallBulletFactory();
 
             InstallVFXFactories();
 
             InstallSoundShotFactory();
+
+            InstallBonuses();
+        }
+
+        private void InstallBonuses()
+        {
+            Container.BindFactory<Bomb, Bomb.Factory>()
+               .FromComponentInNewPrefab(m_BombPrefab)
+               .WithGameObjectName("Bomb")
+               .UnderTransformGroup("BombGroup");
         }
 
         private void InstallBulletFactory()
@@ -96,6 +124,11 @@ namespace TestProject
                .FromComponentInNewPrefab(m_BulletCollisionEffect)
                .WithGameObjectName("BulletCollisionEffect")
                .UnderTransformGroup("BulletCollistionEffectGroup");
+
+            Container.BindFactory<ExplosionEffect, ExplosionEffect.Factory>()
+               .FromComponentInNewPrefab(m_ExplosionEffectPrefab)
+               .WithGameObjectName("ExplosionEffect")
+               .UnderTransformGroup("ExplosionEffectGroup");
         }
     }
 }

@@ -3,19 +3,25 @@ using Zenject;
 
 namespace TestProject
 {
-    public class VFXManager : MonoBehaviour
+    public class VFXManager
     {
 
         BloodEffect.Factory m_BulletEffectFactory;
         MuzzleFlashEffect.Factory m_MuzzleFactory;
         BulletCollistionEffect.Factory m_BulletCollision;
+        ExplosionEffect.Factory m_ExplosionEffect;
 
-        [Inject]
-        void Construct(BloodEffect.Factory bulletEffectFactory, MuzzleFlashEffect.Factory muzzleFactory, BulletCollistionEffect.Factory bulletCollision)
+        public VFXManager(
+            BloodEffect.Factory bulletEffectFactory,
+            MuzzleFlashEffect.Factory muzzleFactory,
+            BulletCollistionEffect.Factory bulletCollision,
+            ExplosionEffect.Factory explosionEffect
+            )
         {
             m_BulletEffectFactory = bulletEffectFactory;
             m_MuzzleFactory = muzzleFactory;
             m_BulletCollision = bulletCollision;
+            m_ExplosionEffect = explosionEffect;
         }
 
 
@@ -29,6 +35,13 @@ namespace TestProject
         public void PlayMuzzleEffectWithPos(Vector3 postion)
         {
             var effect = m_MuzzleFactory.Create();
+            effect.Play();
+            effect.transform.position = postion;
+        }
+
+        public void PlayExplosionWithPos(Vector3 postion)
+        {
+            var effect = m_ExplosionEffect.Create();
             effect.Play();
             effect.transform.position = postion;
         }
