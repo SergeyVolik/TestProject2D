@@ -6,6 +6,7 @@ using Zenject;
 
 namespace TestProject
 {
+   
     public class UiManager : MonoBehaviour
     {
         [SerializeField]
@@ -29,7 +30,11 @@ namespace TestProject
             m_ShotRightButton.onClick.AddListener(Player2Shot);
         }
 
-
+        private void LateUpdate()
+        {
+            LeftButtonClicked = false;
+            RightButtonClicked = false;
+        }
         void Player1Shot()
         {
             LeftButtonClicked = true;

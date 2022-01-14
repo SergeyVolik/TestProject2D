@@ -163,6 +163,7 @@ MonoBehaviour:
   m_SoundShotPrefab: {fileID: 7151966641208392374, guid: 6f5a854c7cd0d7e4998fb354ff2bddcb, type: 3}
   m_SoundManager: {fileID: 1172192156}
   m_VFXManager: {fileID: 1172192157}
+  m_Ui: {fileID: 278890922}
 --- !u!114 &4651116
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -43,6 +43,8 @@ namespace TestProject
         [SerializeField]
         VFXManager m_VFXManager;
 
+        [SerializeField]
+        UiManager m_Ui;
         public override void InstallBindings()
         {
             Container.Bind<Player>().WithId(Players.Player1).FromInstance(m_Player1).AsTransient();
@@ -51,6 +53,7 @@ namespace TestProject
             Container.Bind<TapManager>().FromInstance(Tap).AsSingle().NonLazy();
             Container.Bind<SoundManager>().FromInstance(m_SoundManager).AsSingle().NonLazy();
             Container.Bind<VFXManager>().FromInstance(m_VFXManager).AsSingle().NonLazy();
+            Container.Bind<UiManager>().FromInstance(m_Ui).AsSingle().NonLazy();
 
             InstallBulletFactory();
 

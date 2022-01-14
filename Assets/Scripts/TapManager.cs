@@ -6,6 +6,7 @@ using Zenject;
 
 namespace TestProject
 {
+    [DefaultExecutionOrder(-1)]
     public class TapManager : MonoBehaviour
     {
         private bool m_LeftScreenTap;
@@ -14,27 +15,61 @@ namespace TestProject
         public bool LeftScreenTap => m_LeftScreenTap;
         public bool RightScreenTap => m_RightScreenTap;
 
-        public void LateUpdate()
+        private UiManager m_UI;
+        [Inject]
+        void Construct(UiManager ui)
+        {
+            m_UI = ui;
+        }
+
+        public void Update()
         {
             m_LeftScreenTap = false;
             m_RightScreenTap = false;
 
-            if (Input.GetMouseButtonUp(0) && EventSystem.current.currentSelectedGameObject == null)
+            
+#if UNITY_EDITOR
+            
+            if (Input.GetMouseButtonUp(0))
             {
-                if (CheckLeftBound())
+                Debug.Log("Tap");
+                var result = TouchOnTheLeftSide(Input.mousePosition);
+                if (result && !m_UI.LeftButtonClicked)
                 {
                     m_LeftScreenTap = true;
                     return;
                 }
-
-                m_RightScreenTap = true;
+                else if(!result && !m_UI.RightButtonClicked)
+                    m_RightScreenTap = true;
             }
+
+
+#elif UNITY_ANDROID || UNITY_IOS
+            for (int i = 0; i < Input.touches.Length; i++)
+            {
+                var touchPhaseBegan = Input.touches[i].phase == TouchPhase.Ended;
+                if (touchPhaseBegan)
+                {
+                     var result = TouchOnTheLeftSide(Input.touches[i].position);
+
+                    if (result && !m_UI.LeftButtonClicked)
+                    {
+                        m_LeftScreenTap = true;
+                    }
+                    else if(!result && !m_UI.RightButtonClicked)
+                        m_RightScreenTap = true;
+                }
+
+            }
+            
+#endif
         }
 
 
-        bool CheckLeftBound()
+
+        bool TouchOnTheLeftSide(Vector2 pos)
         {
-            var pos = Input.mousePosition;
+           
 
             if (pos.x < Screen.width / 2)
             {
