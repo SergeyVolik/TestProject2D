@@ -60,9 +60,12 @@ namespace TestProject
         FirstAidKit m_FirstAidKitPrefab;
         [SerializeField]
         ShieldBuster m_ShieldPrefab;
+        
+        [SerializeField]
+        RoketBulletsBonus m_RoketBulletsBonusPrefab;
+
         [SerializeField]
         BonusSpawner m_BonusSpawner;
-
         public override void InstallBindings()
         {
             Container.Bind<Player>().WithId(Players.Player1).FromInstance(m_Player1).AsTransient();
@@ -102,6 +105,11 @@ namespace TestProject
                 .FromComponentInNewPrefab(m_ShieldPrefab)
                 .WithGameObjectName("ShieldBuster")
                 .UnderTransformGroup("ShieldBusterGroup");
+
+            Container.BindFactory<RoketBulletsBonus, RoketBulletsBonus.Factory>()
+                .FromComponentInNewPrefab(m_RoketBulletsBonusPrefab)
+                .WithGameObjectName("RoketBulletsBonus")
+                .UnderTransformGroup("RoketBulletsBonusGroup");
         }
 
         private void InstallBulletFactory()
@@ -122,8 +130,6 @@ namespace TestProject
 
         private void InstallVFXFactories()
         {
-        
-
             Container.BindFactory<BloodEffect, BloodEffect.Factory>()
                 .FromComponentInNewPrefab(m_BloodEffectPrefab)
                 .WithGameObjectName("BloodEffect")

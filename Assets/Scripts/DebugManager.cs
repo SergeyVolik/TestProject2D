@@ -59,6 +59,12 @@ namespace TestProject
 
             }
 
+            if (Input.GetKeyDown(KeyCode.F8))
+            {
+                m_Spawner.SpawnRoketBulletsBonus();
+
+            }
+
         }
 
     }

@@ -14,13 +14,15 @@ namespace TestProject
         Bomb.Factory m_BombFactory;
         FirstAidKit.Factory m_FIKFactory;
         ShieldBuster.Factory m_ShieldBusterFactory;
+        RoketBulletsBonus.Factory m_RoketBulletsBonus;
 
         [Inject]
-        void Construct(Bomb.Factory bombFactory, FirstAidKit.Factory fikFactory, ShieldBuster.Factory shieldBusterFactory)
+        void Construct(Bomb.Factory bombFactory, FirstAidKit.Factory fikFactory, ShieldBuster.Factory shieldBusterFactory, RoketBulletsBonus.Factory roketBulletsBonus)
         {
             m_BombFactory = bombFactory;
             m_FIKFactory = fikFactory;
             m_ShieldBusterFactory = shieldBusterFactory;
+            m_RoketBulletsBonus = roketBulletsBonus;
         }
 
 
@@ -43,6 +45,14 @@ namespace TestProject
         public void SpawnShieldBuster()
         {
             var fik = m_ShieldBusterFactory.Create();
+            fik.transform.position = m_SpawnPoint.position;
+
+
+        }
+
+        public void SpawnRoketBulletsBonus()
+        {
+            var fik = m_RoketBulletsBonus.Create();
             fik.transform.position = m_SpawnPoint.position;
 
 
