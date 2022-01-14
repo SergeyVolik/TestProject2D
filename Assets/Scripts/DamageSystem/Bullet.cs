@@ -26,6 +26,7 @@ namespace TestProject
         public Rigidbody2D Rigidbody2D => m_Rg;
 
         public event Action<Vector2> OnBulletCollision;
+        public bool IsExplodable;
 
         [Inject]
         void Construct(

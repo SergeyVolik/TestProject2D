@@ -85,6 +85,11 @@ namespace TestProject
         {
             m_Shield.Activate();
         }
+
+        public void ActivateRoketBullets()
+        {
+            m_Gun.ActivateRoketBullets();
+        }
     }
 
 }

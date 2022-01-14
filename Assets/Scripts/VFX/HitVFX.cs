@@ -26,6 +26,11 @@ namespace TestProject
 
         void OnShot(int damge, Collision2D col, bool fromLeft)
         {
+            if (col.otherCollider.TryGetComponent<Bullet>(out var bullet) && bullet.IsExplodable)
+            {
+                m_VFXManager.PlayExplosionWithPos(col.contacts[0].point);
+            }
+
             m_VFXManager.PlayBloodEffect(fromLeft, col.collider.transform, col.contacts[0].point);
         }
     }

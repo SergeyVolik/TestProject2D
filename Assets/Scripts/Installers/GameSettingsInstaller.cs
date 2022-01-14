@@ -38,7 +38,7 @@ namespace TestProject
         public BombSettings Bomb;
         public ShieldSettings Shield;
         public FirstAidKitSettings AidKit;
-
+        public RoketBulletsBonusSettings RoketBonus;
 
         [Serializable]
         public class BombSettings
@@ -58,6 +58,14 @@ namespace TestProject
         {
             public int MaxHealth = 10;
             public int HealthStrength;
+        }
+
+        [Serializable]
+        public class RoketBulletsBonusSettings
+        {
+            public int duration = 5;
+            public Sprite RoketSprite;
+
         }
     }
 

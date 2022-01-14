@@ -11,15 +11,15 @@ namespace TestProject
 
         [SerializeField]
         Transform m_SpawnPoint;
-        
+
 
         Bullet.Factory m_Factory;
         Player m_Player;
         ShootingSettigs m_ShootingSettigs;
-        VFXManager m_VFXManager;
+        BonusSettings.RoketBulletsBonusSettings m_RoketBulletsSettings;
 
         private bool m_CanShoot = true;
-
+        private bool m_RoketBollets = false;
         public event Action<Vector2> OnShot;
 
         [Inject]
@@ -27,13 +27,12 @@ namespace TestProject
              Bullet.Factory factory,
              Player player,
              ShootingSettigs settings,
-             SoundManager soundsManager,
-             VFXManager vfxManager)
+             BonusSettings bonusSettings)
         {
+            m_RoketBulletsSettings = bonusSettings.RoketBonus;
             m_Factory = factory;
             m_Player = player;
             m_ShootingSettigs = settings;
-            m_VFXManager = vfxManager;
 
         }
 
@@ -50,18 +49,28 @@ namespace TestProject
                 bullet.Rigidbody2D.AddForce(m_Player.LookDiraction * m_ShootingSettigs.BulletSpeed);
                 bullet.Owner = m_Player;
 
-                StartCoroutine(WaiDelay());
+                if (m_RoketBollets)
+                {
+                    bullet.SpriteRenderer.sprite = m_RoketBulletsSettings.RoketSprite;
+                    bullet.IsExplodable = true;
+                }
+
+                StartCoroutine(WaitDelay(m_ShootingSettigs.DelayBetweenShots, () => m_CanShoot = false, () => m_CanShoot = true));
 
                 OnShot?.Invoke(m_SpawnPoint.position);
             }
         }
 
-   
-        IEnumerator WaiDelay()
+        public void ActivateRoketBullets()
         {
-            m_CanShoot = false;
-            yield return new WaitForSeconds(m_ShootingSettigs.DelayBetweenShots);
-            m_CanShoot = true;
+            StartCoroutine(WaitDelay(m_RoketBulletsSettings.duration, () => m_RoketBollets = true, () => m_RoketBollets = false));
+        }
+
+        IEnumerator WaitDelay(float delay, Action beforeDelay, Action afterDelay)
+        {
+            beforeDelay?.Invoke();
+            yield return new WaitForSeconds(delay);
+            afterDelay?.Invoke();
         }
 
 

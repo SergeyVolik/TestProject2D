@@ -30,6 +30,11 @@ namespace TestProject
 
         void PlayHitSound(int damage, Collision2D pos, bool fromLeft)
         {
+            if (pos.otherCollider.TryGetComponent<Bullet>(out var bullet) && bullet.IsExplodable)
+            {
+                m_SManager.PlayExplosionSound();
+            }
+
             m_SManager.PlayHitSound();
         }
     }
