@@ -13,10 +13,12 @@ namespace TestProject
 
         private static readonly int JumpAnimParam;
         private static readonly int IsGroundedAnimParam;
+        private static readonly int IsLookLeftAnimParam;
         static AnimationController()
         {
             JumpAnimParam = Animator.StringToHash("Jump");
             IsGroundedAnimParam = Animator.StringToHash("IsGrounded");
+            IsLookLeftAnimParam = Animator.StringToHash("LookLeft");
         }
         void Awake()
         {
@@ -38,6 +40,7 @@ namespace TestProject
         private void Update()
         {
             m_Animator.SetBool(IsGroundedAnimParam, m_Player.IsGrounded);
+            m_Animator.SetBool(IsLookLeftAnimParam, m_Player.LookLeft);
         }
 
         void Jump()

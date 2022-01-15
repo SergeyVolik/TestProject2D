@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestProject
 {
-    public class Chess : BodyPart, IChess
+    public class Chest : BodyPart, IChest
     {
 
     }

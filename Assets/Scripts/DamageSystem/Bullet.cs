@@ -61,7 +61,7 @@ namespace TestProject
                     leg.TakeDamge(m_ShootingSettigs.LegDamage, collision, fromLeft);
 
                     break;
-                case IChess chess:
+                case IChest chess:
                     chess.TakeDamge(m_ShootingSettigs.ChessDamage, collision, fromLeft);
                     break;
                 case IBullet bullet:

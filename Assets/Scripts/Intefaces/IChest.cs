@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestProject
 {
-    public interface IChess : IDamageable
+    public interface IChest : IDamageable
     {
 
     }

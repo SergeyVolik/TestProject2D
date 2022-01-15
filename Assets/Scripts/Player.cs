@@ -16,18 +16,27 @@ namespace TestProject
         private bool m_IsGrounded = false;
 
         private int m_CurrentJump;
-
         private HealthHandler m_HealthHandler;
         private Gun m_Gun;
         private PlayerSettings PlayerSettings;
-        public Vector2 LookDiraction => transform.rotation.eulerAngles.y == 180 ? Vector2.left : Vector2.right;
-        public bool LookLeft => transform.rotation.eulerAngles.y == 180 ? true : false;
+        private BodyShield m_Shield;
+
+        [SerializeField]
+        BodyParts m_BodyParts;
+        [SerializeField]
+        RagdollModel m_Ragdoll;
+        [SerializeField]
+        bool m_LookLeft;
+
+        public Vector2 LookDiraction => !m_LookLeft ? Vector2.right : Vector2.left;
+        public bool LookLeft => m_LookLeft;
+
         public bool IsGrounded => m_IsGrounded;
 
         public event Action OnJumped;
 
-
-        BodyShield m_Shield;
+        private bool m_IsAlive = true;
+      
 
         [Inject]
         private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings, BodyShield shield)
@@ -41,23 +50,66 @@ namespace TestProject
             m_Shield = shield;
         }
 
-        private bool CheckGrounded()
+        private void OnEnable()
         {
-            return Physics2D.Raycast(BodyCollider.bounds.center, Vector2.down, BodyCollider.bounds.extents.y + .1f, PlayerSettings.GoundMask);
+            m_HealthHandler.OnDamageTaken += CheckDeath;
         }
+
+     
 
         private void Update()
         {
 
-            m_IsGrounded = CheckGrounded();
+            m_IsGrounded = CheckGround();
 
             if (m_IsGrounded)
                 m_CurrentJump = 0;
         }
 
+        private void OnDisable()
+        {
+            m_HealthHandler.OnDamageTaken -= CheckDeath;
+        }
+
+        private void CheckDeath(int damage, Collision2D collision, bool fromLeft)
+        {
+            if (m_HealthHandler.Health <= 0)
+            {
+                ActivateRagdoll(fromLeft);
+              
+            }
+        }
+
+        private void ActivateRagdoll(bool fromLeft)
+        {
+            Debug.Log($"{gameObject.name} killed");
+            m_IsAlive = false;
+            BodyCollider.enabled = false;
+            BodyRB.simulated = false;
+            var vector = fromLeft ? Vector2.left : Vector2.right;
+           
+            m_Ragdoll.gameObject.SetActive(true);
+            m_Ragdoll.transform.parent = null;
+            m_Ragdoll.transform.rotation = Quaternion.identity;
+            m_Ragdoll.SetPositionsAndRotations(m_BodyParts);
+            m_Ragdoll.BodyParts.Chest.GetComponent<Rigidbody2D>().AddForce(vector * 5000);
+            gameObject.SetActive(false);
+           
+
+
+
+        }
+
+        private bool CheckGround()
+        {
+            return Physics2D.Raycast(BodyCollider.bounds.center, Vector2.down, BodyCollider.bounds.extents.y + .1f, PlayerSettings.GoundMask);
+        }
+
+      
+
         public void Jump()
         {
-            if (m_CurrentJump < PlayerSettings.AdditionalJumps)
+            if (m_CurrentJump < PlayerSettings.AdditionalJumps && m_IsAlive) 
             {
                 m_CurrentJump++;
                 BodyRB.velocity = new Vector2(BodyRB.velocity.x, 0);
@@ -68,7 +120,10 @@ namespace TestProject
 
         public void Shot()
         {
-            m_Gun.Shot();
+            if (m_IsAlive)
+            {
+                m_Gun.Shot();
+            }
         }
 
         public void Heal(int value)
