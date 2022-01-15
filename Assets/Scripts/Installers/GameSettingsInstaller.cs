@@ -62,7 +62,8 @@ namespace TestProject
         public class FirstAidKitSettings
         {
             public int MaxHealth = 10;
-            public int HealthStrength;
+            public int HealthStrength = 5;
+            public float lifetime = 5;
         }
 
         [Serializable]

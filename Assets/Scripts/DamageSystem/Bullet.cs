@@ -65,10 +65,10 @@ namespace TestProject
                     chess.TakeDamge(m_ShootingSettigs.ChessDamage, collision, fromLeft);
                     break;
                 case IBullet bullet:
-
-
                     bullet.TakeDamge(9999, collision, fromLeft);
-
+                    break;
+                case Bomb bomb:
+                    TakeDamageInternal();
                     break;
 
                 default:
@@ -96,7 +96,7 @@ namespace TestProject
         private void TakeDamageInternal()
         {
 
-                OnBulletCollision?.Invoke(transform.position);
+            OnBulletCollision?.Invoke(transform.position);
 
 
             StartCoroutine(WainAndDestory());

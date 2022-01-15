@@ -7,51 +7,44 @@ using System;
 
 namespace TestProject
 {
-    [RequireComponent(typeof(Rigidbody2D))]
-    public class Bomb : MonoBehaviour
-    {
-        [SerializeField]
-        private TextMesh m_TimerText;
-        private BonusSettings.BombSettings m_Settings;
 
+    
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class Bomb : MonoBehaviour, IDamageable
+    {
+        private BonusSettings.BombSettings m_Settings;
+        LifetimeHandler m_LifetimeHandler;
         public event Action<Vector2> OnExploded;
 
         [Inject]
-        void Construct(BonusSettings settings)
+        void Construct(BonusSettings settings, LifetimeHandler lfHandler)
         {
             m_Settings = settings.Bomb;
+            m_LifetimeHandler = lfHandler;
+            m_LifetimeHandler.lifeTime = m_Settings.timeToExplosion;
+
         }
 
         private void Awake()
         {
-            StartCoroutine(Timer());
             var rb = GetComponent<Rigidbody2D>();
             rb.mass = m_Settings.bombMass;
             transform.localScale = new Vector3(m_Settings.bombSize, m_Settings.bombSize, m_Settings.bombSize);
         }
 
-        IEnumerator Timer()
+        void OnEnable()
         {
-            var time = m_Settings.timeToExplosion;
-
-            while (time > 0)
-            {
-                m_TimerText.text = time.ToString();
-                time--;
-                yield return new WaitForSeconds(1f);
-
-            }
-
-            Debug.Log("Boom!");
-
-
-            Explode();
-
+            m_LifetimeHandler.Died += Explode;
         }
+
+        void OnDisable()
+        {
+            m_LifetimeHandler.Died -= Explode;
+        }
+       
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            Debug.Log(collision.collider.gameObject.name);
             if (collision.collider.TryGetComponent<Player>(out _))
             {
                
@@ -76,7 +69,7 @@ namespace TestProject
             for (int i = 0; i < colliders.Length; i++)
             {
                 if (colliders[i].TryGetComponent<Rigidbody2D>(out var rb))
-                {               
+                {
                     var vector = (rb.transform.position - transform.position).normalized;
                     rb.AddForce(vector * m_Settings.explosionForce);
                 }
@@ -87,7 +80,10 @@ namespace TestProject
             Destroy(gameObject);
         }
 
-
+        public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
+        {
+           
+        }
 
         public class Factory : PlaceholderFactory<Bomb> { }
 

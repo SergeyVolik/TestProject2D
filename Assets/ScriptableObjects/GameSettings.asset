@@ -19,7 +19,7 @@ MonoBehaviour:
     ExplosionSFX: {fileID: 11400000, guid: 262997035ff5bdc41852bd2b4bc15af4, type: 2}
   ShootingSettigs:
     BulletSpeed: 1000
-    DelayBetweenShots: 0.5
+    DelayBetweenShots: 0
     HeadDamage: 3
     ChessDamage: 2
     LegDamage: 1
@@ -33,11 +33,11 @@ MonoBehaviour:
   BonusSettings:
     Bomb:
       timeToExplosion: 10
-      explosionForce: 10000
+      explosionForce: 5000
       explosionRadius: 4
       explosionDamage: 99999
-      bombMass: 4
-      bombSize: 1.7
+      bombMass: 6
+      bombSize: 1.5
     Shield:
       duration: 5
       size: 5
@@ -45,6 +45,7 @@ MonoBehaviour:
     AidKit:
       MaxHealth: 10
       HealthStrength: 2
+      lifetime: 5
     RoketBonus:
       duration: 5
       RoketSprite: {fileID: -7573354855677281409, guid: 569a14747e9b28d4aa068a79b15ab86e, type: 3}
