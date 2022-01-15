@@ -56,7 +56,7 @@ namespace TestProject
         private void RightPlayerWinner()
         {
             Panel.gameObject.SetActive(true);
-            m_Text.text = "Right player is the winner";
+            m_Text.text = "Right player is the winner!";
         }
 
         private void RestartScene()
@@ -70,7 +70,7 @@ namespace TestProject
         private void LeftPlayerWinner()
         {
             Panel.gameObject.SetActive(true);
-            m_Text.text = "Left player is the winner";
+            m_Text.text = "Left player is the winner!";
         }
 
         private void OnDisable()

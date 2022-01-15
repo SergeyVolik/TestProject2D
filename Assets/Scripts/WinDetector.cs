@@ -33,12 +33,12 @@ namespace TestProject
         {
             if (m_Player1.Health <= 0)
             {
-                OnLeftPlayerWinner?.Invoke();
+                OnRightPlayerWinner?.Invoke();
             }
 
             if (m_Player2.Health <= 0)
             {
-                OnRightPlayerWinner?.Invoke();
+                OnLeftPlayerWinner?.Invoke();
             }
         }
 
