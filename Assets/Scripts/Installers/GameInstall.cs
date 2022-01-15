@@ -23,6 +23,11 @@ namespace TestProject
         Player m_Player2;
 
         [SerializeField]
+        HealthHandler m_Player1HealthHandler;
+        [SerializeField]
+        HealthHandler m_Player2HealthHandler;
+
+        [SerializeField]
         Bullet m_BulletPrefab;
 
         [Header("Effects")]
@@ -70,6 +75,8 @@ namespace TestProject
         {
             Container.Bind<Player>().WithId(Players.Player1).FromInstance(m_Player1).AsTransient();
             Container.Bind<Player>().WithId(Players.Player2).FromInstance(m_Player2).AsTransient();
+            Container.Bind<HealthHandler>().WithId(Players.Player1).FromInstance(m_Player1HealthHandler).AsTransient();
+            Container.Bind<HealthHandler>().WithId(Players.Player2).FromInstance(m_Player2HealthHandler).AsTransient();
 
             Container.Bind<TapManager>().FromInstance(Tap).AsSingle().NonLazy();
             Container.Bind<SoundManager>().AsSingle().NonLazy();
@@ -79,6 +86,7 @@ namespace TestProject
 
             Container.BindInterfacesTo<JumpManager>().AsSingle().NonLazy();
             Container.BindInterfacesTo<DebugManager>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<WinDetector>().FromNew().AsSingle().NonLazy();
 
             InstallBulletFactory();
 

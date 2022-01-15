@@ -44,7 +44,7 @@ MonoBehaviour:
       color: {r: 0, g: 0.033422947, b: 1, a: 1}
     AidKit:
       MaxHealth: 10
-      HealthStrength: 2
+      HealthStrength: 3
       lifetime: 5
     RoketBonus:
       duration: 5
