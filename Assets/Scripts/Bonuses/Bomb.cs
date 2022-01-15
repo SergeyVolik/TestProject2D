@@ -7,6 +7,7 @@ using System;
 
 namespace TestProject
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class Bomb : MonoBehaviour
     {
         [SerializeField]
@@ -24,6 +25,9 @@ namespace TestProject
         private void Awake()
         {
             StartCoroutine(Timer());
+            var rb = GetComponent<Rigidbody2D>();
+            rb.mass = m_Settings.bombMass;
+            transform.localScale = new Vector3(m_Settings.bombSize, m_Settings.bombSize, m_Settings.bombSize);
         }
 
         IEnumerator Timer()
@@ -47,8 +51,8 @@ namespace TestProject
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-
-            if (collision.collider.TryGetComponent<Player>(out var player))
+            Debug.Log(collision.collider.gameObject.name);
+            if (collision.collider.TryGetComponent<Player>(out _))
             {
                
                 Explode();
@@ -57,7 +61,26 @@ namespace TestProject
 
         private void Explode()
         {
-            Physics2D.OverlapCircleAll(transform.position, 2);
+            var colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].TryGetComponent<IDamageable>(out var damageable))
+                {
+                    damageable?.TakeDamge(m_Settings.explosionDamage, null, false);
+                }
+            }
+
+            colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].TryGetComponent<Rigidbody2D>(out var rb))
+                {               
+                    var vector = (rb.transform.position - transform.position).normalized;
+                    rb.AddForce(vector * m_Settings.explosionForce);
+                }
+            }
 
             OnExploded?.Invoke(transform.position);
 

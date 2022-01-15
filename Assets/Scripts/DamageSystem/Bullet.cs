@@ -105,7 +105,7 @@ namespace TestProject
 
         public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
         {
-            if(collision.contacts.Length > 0)
+            if(collision != null && collision.contacts.Length > 0)
                 OnBulletCollision?.Invoke(collision.contacts[0].point);
             
 

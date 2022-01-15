@@ -33,7 +33,7 @@ namespace TestProject
         public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
         {
             
-            if (collision.otherCollider.TryGetComponent<Bullet>(out var bullet))
+            if (collision != null && collision.otherCollider.TryGetComponent<Bullet>(out var bullet))
             {
                 bullet.Owner.ActivateRoketBullets();
             }

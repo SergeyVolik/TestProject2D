@@ -44,6 +44,11 @@ namespace TestProject
         public class BombSettings
         {
             public int timeToExplosion = 5;
+            public int explosionForce = 2000;
+            public int explosionRadius = 4;
+            public int explosionDamage = 99999;
+            public float bombMass = 4;
+            public float bombSize = 4;
         }
         [Serializable]
         public class ShieldSettings

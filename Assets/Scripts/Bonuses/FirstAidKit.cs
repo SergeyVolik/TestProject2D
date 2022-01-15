@@ -34,7 +34,7 @@ namespace TestProject
         {
             if (m_Health.Health <= 0)
             {
-                if (collision.otherCollider.TryGetComponent<Bullet>(out var bullet))
+                if (collision != null && collision.otherCollider.TryGetComponent<Bullet>(out var bullet))
                 {
                     Debug.Log("Heal");
                     bullet.Owner.Heal(m_Settings.HealthStrength);
