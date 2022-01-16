@@ -64,6 +64,11 @@ namespace TestProject
                 m_Spawner.SpawnRoketBulletsBonus();
 
             }
+            if (Input.GetKeyDown(KeyCode.F9))
+            {
+                m_Spawner.SpawnHeadShieldBuster();
+
+            }
 
         }
 

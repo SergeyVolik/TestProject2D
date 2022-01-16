@@ -8,16 +8,18 @@ namespace TestProject
     [RequireComponent(typeof(SpriteRenderer))]
     public class BodyShield : MonoBehaviour, IDamageable, IBulletVisitor, IRoketVisitor
     {
-        SpriteRenderer m_SR;
-        BonusSettings.ShieldSettings m_ShieldSettins;
+        protected SpriteRenderer m_SR;
+        protected BonusSettings.ShieldSettings m_ShieldSettins;
 
+        protected float duration;
         [Inject]
         void Construct(BonusSettings settings)
         {
             m_ShieldSettins = settings.Shield;
+            duration = m_ShieldSettins.duration;
         }
 
-        void Start()
+        protected virtual void Start()
         {
             m_SR = GetComponent<SpriteRenderer>();
             m_SR.color = m_ShieldSettins.color;
@@ -43,7 +45,7 @@ namespace TestProject
 
         IEnumerator WaitTime()
         {
-            yield return new WaitForSeconds(m_ShieldSettins.duration);
+            yield return new WaitForSeconds(duration);
             Deactivate();
         }
 

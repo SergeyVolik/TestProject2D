@@ -84,6 +84,7 @@ namespace TestProject
         public class ShieldSettings
         {
             public int duration = 5;
+            public int headShieldDuration = 20;
             public float size = 5;
             public Color color;
         }

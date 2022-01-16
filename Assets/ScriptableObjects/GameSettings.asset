@@ -49,7 +49,7 @@ MonoBehaviour:
       HealthStrength: 3
       lifetime: 5
     RoketBonus:
-      duration: 5
+      duration: 20
       RoketSprite: {fileID: -7573354855677281409, guid: 569a14747e9b28d4aa068a79b15ab86e, type: 3}
   GameEndSettings:
     ShowUIDelay: 1

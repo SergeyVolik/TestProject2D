@@ -15,14 +15,22 @@ namespace TestProject
         FirstAidKit.Factory m_FIKFactory;
         ShieldBuster.Factory m_ShieldBusterFactory;
         RoketBulletsBonus.Factory m_RoketBulletsBonus;
+        HeadShieldBuster.Factory m_HeadShieldBuster;
+
         BonusSettings m_Settings;
+
+
+        float m_Time;
+        float m_NextSpawnTime;
+
         [Inject]
         void Construct(
             Bomb.Factory bombFactory,
             FirstAidKit.Factory fikFactory,
             ShieldBuster.Factory shieldBusterFactory,
             RoketBulletsBonus.Factory roketBulletsBonus,
-            BonusSettings settings
+            BonusSettings settings,
+            HeadShieldBuster.Factory headShieldBuster
             )
         {
             m_Settings = settings;
@@ -30,6 +38,7 @@ namespace TestProject
             m_FIKFactory = fikFactory;
             m_ShieldBusterFactory = shieldBusterFactory;
             m_RoketBulletsBonus = roketBulletsBonus;
+            m_HeadShieldBuster = headShieldBuster;
         }
 
 
@@ -51,22 +60,29 @@ namespace TestProject
 
         public void SpawnShieldBuster()
         {
-            var fik = m_ShieldBusterFactory.Create();
-            fik.transform.position = m_SpawnPoint.position;
+            var sheild = m_ShieldBusterFactory.Create();
+            sheild.transform.position = m_SpawnPoint.position;
+
+
+        }
+
+        public void SpawnHeadShieldBuster()
+        {
+            var sheild = m_HeadShieldBuster.Create();
+            sheild.transform.position = m_SpawnPoint.position;
 
 
         }
 
         public void SpawnRoketBulletsBonus()
         {
-            var fik = m_RoketBulletsBonus.Create();
-            fik.transform.position = m_SpawnPoint.position;
+            var roket = m_RoketBulletsBonus.Create();
+            roket.transform.position = m_SpawnPoint.position;
 
 
         }
 
-        float m_Time;
-        float m_NextSpawnTime;
+
         private void Start()
         {
             GenerateNextTime();
@@ -79,7 +95,7 @@ namespace TestProject
 
         void SpawnRandomBonus()
         {
-            int bonus = Random.Range(0, 3);
+            int bonus = Random.Range(0, 4);
 
             switch (bonus)
             {
@@ -94,6 +110,9 @@ namespace TestProject
                     break;
                 case 3:
                     SpawnRoketBulletsBonus();
+                    break;
+                case 4:
+                    SpawnHeadShieldBuster();
                     break;
                 default:
                     break;

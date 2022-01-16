@@ -73,7 +73,8 @@ namespace TestProject
         FirstAidKit m_FirstAidKitPrefab;
         [SerializeField]
         ShieldBuster m_ShieldPrefab;
-
+        [SerializeField]
+        HeadShieldBuster m_HeadShieldPrefab;
         [SerializeField]
         RoketBulletsBonus m_RoketBulletsBonusPrefab;
 
@@ -130,6 +131,11 @@ namespace TestProject
                 .FromComponentInNewPrefab(m_RoketBulletsBonusPrefab)
                 .WithGameObjectName("RoketBulletsBonus")
                 .UnderTransformGroup("RoketBulletsBonusGroup");
+
+            Container.BindFactory<HeadShieldBuster, HeadShieldBuster.Factory>()
+               .FromComponentInNewPrefab(m_HeadShieldPrefab)
+               .WithGameObjectName("HeadShieldBuster")
+               .UnderTransformGroup("HeadShieldBusterGroup");
         }
 
         private void InstallBulletFactory()

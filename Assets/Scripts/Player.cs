@@ -38,8 +38,15 @@ namespace TestProject
         public bool IsAlive => m_IsAlive;
 
         private float m_BulletDeathForce;
-        [Inject]
-        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings, BodyShield shield, RagdollSettings rdSettings)
+        HeadShield m_HeadShield;
+       [Inject]
+        private void Construct(
+           HealthHandler healthHandler,
+           Gun gun,
+           PlayerSettings settings,
+           BodyShield shield,
+           HeadShield headShield,
+           RagdollSettings rdSettings)
         {
             m_HealthHandler = healthHandler;
             m_HealthHandler.Health = settings.MaxHealth;
@@ -49,6 +56,7 @@ namespace TestProject
             PlayerSettings = settings;
             m_Shield = shield;
             m_BulletDeathForce = rdSettings.bulletDeathForce;
+            m_HeadShield = headShield;
         }
 
         private void OnEnable()
@@ -139,6 +147,11 @@ namespace TestProject
         public void ActivateShield()
         {
             m_Shield.Activate();
+        }
+
+        public void ActivateHeadShield()
+        {
+            m_HeadShield.Activate();
         }
 
         public void ActivateRoketBullets()
