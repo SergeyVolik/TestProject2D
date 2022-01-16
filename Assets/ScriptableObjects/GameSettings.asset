@@ -32,9 +32,9 @@ MonoBehaviour:
     AdditionalJumps: 1
     JumpForce: 600
   BonusSettings:
-    SpawnBonusTimeRange: {x: 6.98, y: 10}
+    SpawnBonusTimeRange: {x: 5, y: 7.98}
     Bomb:
-      timeToExplosion: 5
+      timeToExplosion: 7
       explosionForce: 7000
       explosionRadius: 4
       explosionDamage: 99999
@@ -42,12 +42,13 @@ MonoBehaviour:
       bombSize: 1.5
     Shield:
       duration: 5
+      headShieldDuration: 20
       size: 5
       color: {r: 0, g: 0.033422947, b: 1, a: 1}
     AidKit:
       MaxHealth: 10
       HealthStrength: 3
-      lifetime: 5
+      lifetime: 7
     RoketBonus:
       duration: 20
       RoketSprite: {fileID: -7573354855677281409, guid: 569a14747e9b28d4aa068a79b15ab86e, type: 3}

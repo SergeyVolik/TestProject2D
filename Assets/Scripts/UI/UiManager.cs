@@ -102,6 +102,7 @@ namespace TestProject
         {
             m_EndGameUI.DOFade(1, m_Settings.FadeUITime).SetDelay(m_Settings.ShowUIDelay).OnComplete(() => {
                 m_EndGameUI.interactable = true;
+                m_EndGameUI.blocksRaycasts = true;
             });
            
         }

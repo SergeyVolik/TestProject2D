@@ -41,12 +41,12 @@ namespace TestProject
             m_HeadShieldBuster = headShieldBuster;
         }
 
-
+        GameObject m_PrevBonus;
         public void SpawnBomb()
         {
             var bomb = m_BombFactory.Create();
             bomb.transform.position = m_SpawnPoint.position;
-
+            m_PrevBonus = bomb.gameObject;
 
         }
 
@@ -54,7 +54,7 @@ namespace TestProject
         {
             var fik = m_FIKFactory.Create();
             fik.transform.position = m_SpawnPoint.position;
-
+            m_PrevBonus = fik.gameObject;
 
         }
 
@@ -62,7 +62,7 @@ namespace TestProject
         {
             var sheild = m_ShieldBusterFactory.Create();
             sheild.transform.position = m_SpawnPoint.position;
-
+            m_PrevBonus = sheild.gameObject;
 
         }
 
@@ -71,7 +71,7 @@ namespace TestProject
             var sheild = m_HeadShieldBuster.Create();
             sheild.transform.position = m_SpawnPoint.position;
 
-
+            m_PrevBonus = sheild.gameObject;
         }
 
         public void SpawnRoketBulletsBonus()
@@ -79,7 +79,7 @@ namespace TestProject
             var roket = m_RoketBulletsBonus.Create();
             roket.transform.position = m_SpawnPoint.position;
 
-
+            m_PrevBonus = roket.gameObject;
         }
 
 
@@ -120,7 +120,7 @@ namespace TestProject
         }
         private void Update()
         {
-            if (m_Time >= m_NextSpawnTime)
+            if (m_Time >= m_NextSpawnTime && m_PrevBonus == null)
             {
                 GenerateNextTime();
                 SpawnRandomBonus();
