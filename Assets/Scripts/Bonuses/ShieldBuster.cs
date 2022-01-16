@@ -6,7 +6,7 @@ using Zenject;
 namespace TestProject
 {
 
-    public class ShieldBuster : MonoBehaviour
+    public class ShieldBuster : MonoBehaviour, IBulletVisitor
     {
         HealthHandler m_Health;
 
@@ -42,6 +42,11 @@ namespace TestProject
             Destroy(gameObject);
             
 
+        }
+
+        public void Visit(Bullet bullet, Collision2D Collision2D)
+        {
+            m_Health.TakeDamge(1, Collision2D, bullet.FromLeft);
         }
 
         public class Factory : PlaceholderFactory<ShieldBuster> { }

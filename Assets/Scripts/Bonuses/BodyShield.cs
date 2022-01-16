@@ -6,7 +6,7 @@ using Zenject;
 namespace TestProject
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    public class BodyShield : MonoBehaviour, IDamageable
+    public class BodyShield : MonoBehaviour, IDamageable, IBulletVisitor, IRoketVisitor
     {
         SpriteRenderer m_SR;
         BonusSettings.ShieldSettings m_ShieldSettins;
@@ -47,6 +47,15 @@ namespace TestProject
             Deactivate();
         }
 
+        public void Visit(Bullet bullet, Collision2D Collision2D)
+        {
+            bullet.MetalCollision();
+        }
+
+        public void Visit(RoketBullet roket, Collision2D col)
+        {
+            roket.Explode();
+        }
     }
 
 }

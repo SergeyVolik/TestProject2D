@@ -6,7 +6,7 @@ using Zenject;
 namespace TestProject
 {
 
-    public class FirstAidKit : MonoBehaviour
+    public class FirstAidKit : MonoBehaviour, IBulletVisitor, IRoketVisitor
     {
         HealthHandler m_Health;
         BonusSettings.FirstAidKitSettings m_Settings;
@@ -52,6 +52,16 @@ namespace TestProject
                 Destroy(gameObject);
             }
 
+        }
+
+        public void Visit(Bullet bullet, Collision2D Collision2D)
+        {
+            m_Health.TakeDamge(1, Collision2D, bullet.FromLeft);
+        }
+
+        public void Visit(RoketBullet roket, Collision2D col)
+        {
+            m_Health.TakeDamge(1, col, roket.FromLeft);
         }
 
         public class Factory : PlaceholderFactory<FirstAidKit> { }

@@ -14,7 +14,8 @@ namespace TestProject
         [SerializeField]
         Rigidbody2D m_RB;
 
-        Bullet.Factory m_Factory;
+        Bullet.Factory m_DefaultBulletFactory;
+        RoketBullet.Factory m_RoketBulletFactory;
         Player m_Player;
         ShootingSettigs m_ShootingSettigs;
         BonusSettings.RoketBulletsBonusSettings m_RoketBulletsSettings;
@@ -26,14 +27,16 @@ namespace TestProject
         [Inject]
         void Construct(
              Bullet.Factory factory,
+             RoketBullet.Factory roketBulletFactory,
              Player player,
              ShootingSettigs settings,
              BonusSettings bonusSettings)
         {
             m_RoketBulletsSettings = bonusSettings.RoketBonus;
-            m_Factory = factory;
+            m_DefaultBulletFactory = factory;
             m_Player = player;
             m_ShootingSettigs = settings;
+            m_RoketBulletFactory = roketBulletFactory;
 
         }
 
@@ -41,7 +44,13 @@ namespace TestProject
         {
             if (m_CanShoot)
             {
-                var bullet = m_Factory.Create();
+                Projectile2D bullet;
+                if (m_RoketBollets)
+                {
+                    bullet = m_RoketBulletFactory.Create();
+                }
+                else bullet = m_DefaultBulletFactory.Create();
+
                 bullet.transform.position = m_SpawnPoint.position;
 
                 if (m_Player.LookLeft)
@@ -53,7 +62,7 @@ namespace TestProject
                 if (m_RoketBollets)
                 {
                     bullet.SpriteRenderer.sprite = m_RoketBulletsSettings.RoketSprite;
-                    bullet.IsExplodable = true;
+
                 }
 
                 StartCoroutine(WaitDelay(m_ShootingSettigs.DelayBetweenShots, () => m_CanShoot = false, () => m_CanShoot = true));

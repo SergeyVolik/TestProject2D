@@ -7,10 +7,7 @@ using Zenject;
 namespace TestProject
 {
 
-    public interface IBulletCollision
-    {
-        event Action<Vector2> OnCollision;
-    }
+
 
     public class BulletCollisionVFX : MonoBehaviour
     {

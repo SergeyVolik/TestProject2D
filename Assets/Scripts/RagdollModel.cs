@@ -49,7 +49,6 @@ namespace TestProject
 
             if (part.TryGetComponent<HingeJoint2D>(out var hj))
             {
-                Debug.Log("HingeJoint2D setup");
                 hj.breakForce = m_Settings.breakForce;
             }
         }

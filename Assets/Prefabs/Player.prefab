@@ -711,7 +711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4344292092811437324}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: RightLegPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,7 +744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2421506242317522119}
   - component: {fileID: 2421506242317522118}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +830,7 @@ GameObject:
   - component: {fileID: 2421506242324603234}
   - component: {fileID: 2421506242324603236}
   - component: {fileID: 2031240155}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LeftLegUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -998,7 +998,7 @@ GameObject:
   - component: {fileID: 2421506242358137603}
   - component: {fileID: 2421506242358137605}
   - component: {fileID: 2421506242358137604}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1312,7 +1312,7 @@ GameObject:
   - component: {fileID: 2421506243219442457}
   - component: {fileID: 2421506243219442459}
   - component: {fileID: 1313833336}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LeftLegLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1679,7 +1679,7 @@ GameObject:
   - component: {fileID: 2421506243508133239}
   - component: {fileID: 2421506243508133237}
   - component: {fileID: 473698624}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1780,10 +1780,10 @@ HingeJoint2D:
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+    m_LowerAngle: -10
+    m_UpperAngle: 10
 --- !u!1 &2421506243582013716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,7 +1954,7 @@ GameObject:
   - component: {fileID: 2421506243634995628}
   - component: {fileID: 2421506243634995630}
   - component: {fileID: 1718052390}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: RightLegUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2384,7 +2384,7 @@ GameObject:
   - component: {fileID: 2421506244017781243}
   - component: {fileID: 2421506244017781245}
   - component: {fileID: 917762265}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: RightLegLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2876,7 +2876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3268535576560134246}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2907,7 +2907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2493053136740250028}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2938,7 +2938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2616010594169422047}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LeftLegPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

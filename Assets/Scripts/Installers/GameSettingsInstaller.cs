@@ -54,6 +54,7 @@ namespace TestProject
         public float mass = 2;
         public float gravity = 4;
         public float breakForce = 2000f;
+        public float bulletDeathForce = 600f;
     }
 
     [Serializable]

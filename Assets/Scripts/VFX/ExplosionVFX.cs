@@ -5,13 +5,12 @@ using Zenject;
 
 namespace TestProject
 {
-    [RequireComponent(typeof(Bomb))]
     public class ExplosionVFX : MonoBehaviour
     {
         VFXManager m_VFXManager;
-        Bomb m_Bomb;
+        IExplosionEvent m_Bomb;
         [Inject]
-        void Construct(VFXManager vFXManager, Bomb bomb)
+        void Construct(VFXManager vFXManager, IExplosionEvent bomb)
         {
             m_VFXManager = vFXManager;
             m_Bomb = bomb;

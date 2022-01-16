@@ -9,10 +9,10 @@ namespace TestProject
     {
 
         SoundManager m_SManager;
-        Bomb m_Bomb;
+        IExplosionEvent m_Bomb;
 
         [Inject]
-        void Construct(SoundManager sManager, Bomb bomb)
+        void Construct(SoundManager sManager, IExplosionEvent bomb)
         {
             m_SManager = sManager;
             m_Bomb = bomb;

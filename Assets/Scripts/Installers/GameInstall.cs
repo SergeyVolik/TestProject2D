@@ -35,6 +35,9 @@ namespace TestProject
         [SerializeField]
         Bullet m_BulletPrefab;
 
+        [SerializeField]
+        RoketBullet m_RoketBulletPrefab;
+
         [Header("Effects")]
 
 
@@ -70,7 +73,7 @@ namespace TestProject
         FirstAidKit m_FirstAidKitPrefab;
         [SerializeField]
         ShieldBuster m_ShieldPrefab;
-        
+
         [SerializeField]
         RoketBulletsBonus m_RoketBulletsBonusPrefab;
 
@@ -132,9 +135,14 @@ namespace TestProject
         private void InstallBulletFactory()
         {
             Container.BindFactory<Bullet, Bullet.Factory>()
-            .FromComponentInNewPrefab(m_BulletPrefab)
-            .WithGameObjectName("Bullet")
-            .UnderTransformGroup("BulletsGroup");
+                .FromComponentInNewPrefab(m_BulletPrefab)
+                .WithGameObjectName("Bullet")
+                .UnderTransformGroup("BulletsGroup");
+
+            Container.BindFactory<RoketBullet, RoketBullet.Factory>()
+               .FromComponentInNewPrefab(m_RoketBulletPrefab)
+               .WithGameObjectName("RoketBullet")
+               .UnderTransformGroup("RoketBulletGroup");
         }
 
         private void InstallSoundShotFactory()

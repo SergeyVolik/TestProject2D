@@ -12,7 +12,7 @@ namespace TestProject
         private HealthHandler m_Health;
 
         public event Action OnDeath;
-
+        private bool IsDead;
         [Inject]
         void Construct(HealthHandler health)
         {
@@ -26,8 +26,11 @@ namespace TestProject
 
         private void M_Health_OnDamageTaken(int arg1, Collision2D arg2, bool arg3)
         {
-            if (m_Health.Health <= 0)
+            if (m_Health.Health <= 0 && !IsDead)
+            {
                 OnDeath?.Invoke();
+                IsDead = true;
+            }
         }
 
         private void OnDisable()

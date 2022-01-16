@@ -37,8 +37,9 @@ namespace TestProject
         private bool m_IsAlive = true;
         public bool IsAlive => m_IsAlive;
 
+        private float m_BulletDeathForce;
         [Inject]
-        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings, BodyShield shield)
+        private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings, BodyShield shield, RagdollSettings rdSettings)
         {
             m_HealthHandler = healthHandler;
             m_HealthHandler.Health = settings.MaxHealth;
@@ -47,6 +48,7 @@ namespace TestProject
             m_Gun = gun;
             PlayerSettings = settings;
             m_Shield = shield;
+            m_BulletDeathForce = rdSettings.bulletDeathForce;
         }
 
         private void OnEnable()
@@ -70,9 +72,10 @@ namespace TestProject
             m_HealthHandler.OnDamageTaken -= CheckDeath;
         }
 
+        
         private void CheckDeath(int damage, Collision2D collision, bool fromLeft)
         {
-            if (m_HealthHandler.Health <= 0)
+            if (m_HealthHandler.Health <= 0 && m_IsAlive)
             {
                 ActivateRagdoll(fromLeft, collision);
               
@@ -93,7 +96,7 @@ namespace TestProject
 
             if (collision != null)
             {
-                collision.rigidbody.AddForce(vector * 5000);
+                collision.rigidbody.AddForce(vector * m_BulletDeathForce);
             }
         }
 

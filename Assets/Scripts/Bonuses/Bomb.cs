@@ -10,10 +10,10 @@ namespace TestProject
 
     
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Bomb : MonoBehaviour, IDamageable
+    public class Bomb : MonoBehaviour, IBulletVisitor, IRoketVisitor, IExplosionEvent
     {
         private BonusSettings.BombSettings m_Settings;
-        LifetimeHandler m_LifetimeHandler;
+        private LifetimeHandler m_LifetimeHandler;
         public event Action<Vector2> OnExploded;
 
         [Inject]
@@ -58,9 +58,9 @@ namespace TestProject
 
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (colliders[i].TryGetComponent<IDamageable>(out var damageable))
+                if (colliders[i].TryGetComponent<IBombVisitor>(out var explVisitor))
                 {
-                    damageable?.TakeDamge(m_Settings.explosionDamage, null, false);
+                    explVisitor.Visit(this);
                 }
             }
 
@@ -80,9 +80,15 @@ namespace TestProject
             Destroy(gameObject);
         }
 
-        public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
+
+        public void Visit(Bullet bullet, Collision2D Collision2D)
         {
-           
+            bullet.MetalCollision();
+        }
+
+        public void Visit(RoketBullet roket, Collision2D col)
+        {
+            roket.Explode();
         }
 
         public class Factory : PlaceholderFactory<Bomb> { }
