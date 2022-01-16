@@ -62,5 +62,5 @@ MonoBehaviour:
   RagdollSettings:
     mass: 2
     gravity: 4
-    breakForce: 2000
+    breakForce: 3000
     bulletDeathForce: 4000

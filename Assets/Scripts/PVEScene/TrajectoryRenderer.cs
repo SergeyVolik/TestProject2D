@@ -32,6 +32,21 @@ namespace TestProject.PVE
 
             m_LineRenderer.SetPositions(points);
         }
+
+        public void DrawLine(Vector2 pos1, Vector2 pos2)
+        {
+            m_LineRenderer.positionCount = 2;
+            m_LineRenderer.SetPosition(0, pos1);
+            m_LineRenderer.SetPosition(1, pos2);
+        }
+
+        public void Hide()
+        {
+            m_LineRenderer.positionCount = 0;
+        }
+
+
+
     }
 
 }

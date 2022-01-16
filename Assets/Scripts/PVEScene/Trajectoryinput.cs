@@ -30,6 +30,7 @@ namespace TestProject.PVE
             if (Input.GetMouseButtonUp(0))
             {
                 startCalc = false;
+                m_Renderer.Hide();
             }
 
 
@@ -54,10 +55,10 @@ namespace TestProject.PVE
             if (startCalc)
             {
                 endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward;
-                var vector = endPos - startPos;
-                var mag = vector.magnitude;
-                vector = vector.normalized * m_Strength * mag;//Vector3.Distance(startPos, endPos);
-                m_Renderer.ShowTrajectory(startPos, vector);
+                //var vector = endPos - startPos;
+                //var mag = vector.magnitude;
+                //vector = vector.normalized * m_Strength * mag;//Vector3.Distance(startPos, endPos);
+                m_Renderer.DrawLine(startPos, endPos);
             }
 
 
