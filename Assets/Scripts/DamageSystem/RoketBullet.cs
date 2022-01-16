@@ -24,6 +24,7 @@ namespace TestProject
             m_Settings = settings.Bomb;
         }
 
+        bool exploed = false;
         protected override void OnCollisionEnter2D(Collision2D collision)
         {
 
@@ -48,29 +49,35 @@ namespace TestProject
 
         public void Explode()
         {
-            var colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
 
-            for (int i = 0; i < colliders.Length; i++)
+            if (!exploed)
             {
-                if (colliders[i].TryGetComponent<IRoketVisitor>(out var explVisitor))
+                exploed = true;
+                var colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
+
+                for (int i = 0; i < colliders.Length; i++)
                 {
-                    explVisitor.Visit(this, null);
+                    if (colliders[i].TryGetComponent<IRoketVisitor>(out var explVisitor))
+                    {
+                        explVisitor.Visit(this, null);
+                    }
                 }
+
+                colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
+
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    if (colliders[i].TryGetComponent<Rigidbody2D>(out var rb))
+                    {
+                        var vector = (rb.transform.position - transform.position).normalized;
+                        rb.AddForce(vector * m_Settings.explosionForce);
+                    }
+                }
+
+                OnExploded?.Invoke(transform.position);
+                Destroy(gameObject);
             }
 
-            colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
-
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].TryGetComponent<Rigidbody2D>(out var rb))
-                {
-                    var vector = (rb.transform.position - transform.position).normalized;
-                    rb.AddForce(vector * m_Settings.explosionForce);
-                }
-            }
-
-            OnExploded?.Invoke(transform.position);
-            Destroy(gameObject);
         }
 
 

@@ -14,6 +14,8 @@ namespace TestProject
     {
         private BonusSettings.BombSettings m_Settings;
         private LifetimeHandler m_LifetimeHandler;
+        private bool exploed;
+
         public event Action<Vector2> OnExploded;
 
         [Inject]
@@ -54,30 +56,36 @@ namespace TestProject
 
         private void Explode()
         {
-            var colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
-
-            for (int i = 0; i < colliders.Length; i++)
+            if (!exploed)
             {
-                if (colliders[i].TryGetComponent<IBombVisitor>(out var explVisitor))
+                exploed = true;
+
+                var colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
+
+                for (int i = 0; i < colliders.Length; i++)
                 {
-                    explVisitor.Visit(this);
+                    if (colliders[i].TryGetComponent<IBombVisitor>(out var explVisitor))
+                    {
+                        explVisitor.Visit(this);
+                    }
                 }
-            }
 
-            colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
+                colliders = Physics2D.OverlapCircleAll(transform.position, m_Settings.explosionRadius);
 
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].TryGetComponent<Rigidbody2D>(out var rb))
+                for (int i = 0; i < colliders.Length; i++)
                 {
-                    var vector = (rb.transform.position - transform.position).normalized;
-                    rb.AddForce(vector * m_Settings.explosionForce);
+                    if (colliders[i].TryGetComponent<Rigidbody2D>(out var rb))
+                    {
+                        var vector = (rb.transform.position - transform.position).normalized;
+                        rb.AddForce(vector * m_Settings.explosionForce);
+                    }
                 }
+
+                OnExploded?.Invoke(transform.position);
+
+                Destroy(gameObject);
             }
-
-            OnExploded?.Invoke(transform.position);
-
-            Destroy(gameObject);
+           
         }
 
 
@@ -86,8 +94,10 @@ namespace TestProject
             bullet.MetalCollision();
         }
 
+        RoketBullet m_LastRoket;
         public void Visit(RoketBullet roket, Collision2D col)
         {
+            m_LastRoket = roket;
             roket.Explode();
         }
 

@@ -6,7 +6,7 @@ using Zenject;
 namespace TestProject
 {
 
-    public class ShieldBuster : MonoBehaviour, IBulletVisitor
+    public class ShieldBuster : MonoBehaviour, IBulletVisitor, IRoketVisitor
     {
         HealthHandler m_Health;
 
@@ -33,7 +33,7 @@ namespace TestProject
         public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
         {
             
-            if (collision != null && collision.otherCollider.TryGetComponent<Bullet>(out var bullet))
+            if (collision != null && collision.otherCollider.TryGetComponent<Projectile2D>(out var bullet))
             {
                 Debug.Log("Heal");
                 bullet.Owner.ActivateShield();
@@ -47,6 +47,11 @@ namespace TestProject
         public void Visit(Bullet bullet, Collision2D Collision2D)
         {
             m_Health.TakeDamge(1, Collision2D, bullet.FromLeft);
+        }
+
+        public void Visit(RoketBullet roket, Collision2D Collision2D)
+        {
+            m_Health.TakeDamge(1, Collision2D, roket.FromLeft);
         }
 
         public class Factory : PlaceholderFactory<ShieldBuster> { }

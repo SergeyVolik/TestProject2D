@@ -6,7 +6,7 @@ using Zenject;
 namespace TestProject
 {
 
-    public class RoketBulletsBonus : MonoBehaviour, IBulletVisitor
+    public class RoketBulletsBonus : MonoBehaviour, IBulletVisitor, IRoketVisitor
     {
         HealthHandler m_Health;
 
@@ -46,6 +46,11 @@ namespace TestProject
         public void Visit(Bullet bullet, Collision2D Collision2D)
         {
             m_Health.TakeDamge(1, Collision2D, bullet.FromLeft);
+        }
+
+        public void Visit(RoketBullet roket, Collision2D Collision2D)
+        {
+            m_Health.TakeDamge(1, Collision2D, roket.FromLeft);
         }
 
         public class Factory : PlaceholderFactory<RoketBulletsBonus> { }
