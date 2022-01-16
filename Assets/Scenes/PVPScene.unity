@@ -2841,6 +2841,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 473698624, guid: 83ed949a98d5aeb47be21be771a2cc2a, type: 3}
+      propertyPath: m_UseLimits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 473698624, guid: 83ed949a98d5aeb47be21be771a2cc2a, type: 3}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 473698624, guid: 83ed949a98d5aeb47be21be771a2cc2a, type: 3}
+      propertyPath: m_AngleLimits.m_UpperAngle
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2421506243498306232, guid: 83ed949a98d5aeb47be21be771a2cc2a, type: 3}
       propertyPath: m_RootOrder
       value: 7

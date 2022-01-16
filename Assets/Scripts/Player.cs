@@ -22,8 +22,6 @@ namespace TestProject
         private BodyShield m_Shield;
 
         [SerializeField]
-        BodyParts m_BodyParts;
-        [SerializeField]
         RagdollModel m_Ragdoll;
         [SerializeField]
         bool m_LookLeft;
@@ -37,7 +35,7 @@ namespace TestProject
         public event Action OnJumped;
 
         private bool m_IsAlive = true;
-      
+        public bool IsAlive => m_IsAlive;
 
         [Inject]
         private void Construct(HealthHandler healthHandler, Gun gun, PlayerSettings settings, BodyShield shield)
@@ -76,29 +74,27 @@ namespace TestProject
         {
             if (m_HealthHandler.Health <= 0)
             {
-                ActivateRagdoll(fromLeft);
+                ActivateRagdoll(fromLeft, collision);
               
             }
         }
 
-        private void ActivateRagdoll(bool fromLeft)
+        private void ActivateRagdoll(bool fromLeft, Collision2D collision)
         {
             Debug.Log($"{gameObject.name} killed");
+            var vector = fromLeft ? Vector2.left : Vector2.right;
+
             m_IsAlive = false;
             BodyCollider.enabled = false;
             BodyRB.simulated = false;
-            var vector = fromLeft ? Vector2.left : Vector2.right;
-           
-            m_Ragdoll.gameObject.SetActive(true);
-            m_Ragdoll.transform.parent = null;
-            m_Ragdoll.transform.rotation = Quaternion.identity;
-            m_Ragdoll.SetPositionsAndRotations(m_BodyParts);
-            m_Ragdoll.BodyParts.Chest.GetComponent<Rigidbody2D>().AddForce(vector * 5000);
-            gameObject.SetActive(false);
-           
 
+            m_Gun.Drop();
+            m_Ragdoll.Activate();
 
-
+            if (collision != null)
+            {
+                collision.rigidbody.AddForce(vector * 5000);
+            }
         }
 
         private bool CheckGround()

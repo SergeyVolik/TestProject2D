@@ -39,6 +39,8 @@ namespace TestProject
 
         private void Update()
         {
+            if (!m_Player.IsAlive)
+                m_Animator.enabled = false;
             m_Animator.SetBool(IsGroundedAnimParam, m_Player.IsGrounded);
             m_Animator.SetBool(IsLookLeftAnimParam, m_Player.LookLeft);
         }

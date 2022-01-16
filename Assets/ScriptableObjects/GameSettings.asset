@@ -34,8 +34,8 @@ MonoBehaviour:
   BonusSettings:
     SpawnBonusTimeRange: {x: 6.98, y: 10}
     Bomb:
-      timeToExplosion: 10
-      explosionForce: 5000
+      timeToExplosion: 5
+      explosionForce: 7000
       explosionRadius: 4
       explosionDamage: 99999
       bombMass: 6
@@ -58,3 +58,7 @@ MonoBehaviour:
     LeftPlayerWinnerText: Left player is the winner!
     RightPlayerWinnerText: Right player is the winner!
     WinnerText: Winner!
+  RagdollSettings:
+    mass: 2
+    gravity: 4
+    breakForce: 2000

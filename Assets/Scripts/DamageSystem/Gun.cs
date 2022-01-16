@@ -11,7 +11,8 @@ namespace TestProject
 
         [SerializeField]
         Transform m_SpawnPoint;
-
+        [SerializeField]
+        Rigidbody2D m_RB;
 
         Bullet.Factory m_Factory;
         Player m_Player;
@@ -73,7 +74,11 @@ namespace TestProject
             afterDelay?.Invoke();
         }
 
-
+        internal void Drop()
+        {
+            transform.parent = null;
+            m_RB.bodyType = RigidbodyType2D.Dynamic;
+        }
     }
 
 }

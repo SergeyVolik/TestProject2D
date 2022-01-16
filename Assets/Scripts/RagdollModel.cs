@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace TestProject
 {
@@ -9,39 +10,56 @@ namespace TestProject
         [SerializeField]
         public BodyParts BodyParts;
 
-        public void SetPositionsAndRotations(BodyParts realModel)
+        RagdollSettings m_Settings;
+
+        [Inject]
+        void Construct(RagdollSettings settings)
         {
-            BodyParts.Chest.SetPositionAndRotation(realModel.Chest.position, realModel.Chest.rotation);     
-            BodyParts.Head.SetPositionAndRotation(realModel.Head.position, realModel.Head.rotation);
+            m_Settings = settings;
+        }
 
+        private void Start()
+        {
+            Debug.Log("RagdollModel setup");
+            for (int i = 0; i < BodyParts.Parts.Count; i++)
+            {
+                SetupPart(BodyParts.Parts[i]);
+            }
 
-            BodyParts.LeftArm.SetPositionAndRotation(realModel.LeftArm.position, realModel.LeftArm.rotation);
-            BodyParts.LeftForearm.SetPositionAndRotation(realModel.LeftForearm.position, realModel.LeftForearm.rotation);
-            BodyParts.RightForearm.SetPositionAndRotation(realModel.RightForearm.position, realModel.RightForearm.rotation);
-            BodyParts.RightArm.SetPositionAndRotation(realModel.RightArm.position, realModel.RightArm.rotation);
-            BodyParts.LeftLeg.SetPositionAndRotation(realModel.LeftLeg.position, realModel.LeftLeg.rotation);
-            BodyParts.LeftThigh.SetPositionAndRotation(realModel.LeftThigh.position, realModel.LeftThigh.rotation);
-            BodyParts.RightLeg.SetPositionAndRotation(realModel.RightLeg.position, realModel.RightLeg.rotation);
-            BodyParts.RightThigh.SetPositionAndRotation(realModel.RightThigh.position, realModel.RightThigh.rotation);
+        }
+        public void Activate()
+        {
+
+            for (int i = 0; i < BodyParts.Parts.Count; i++)
+            {
+                ActivatePart(BodyParts.Parts[i]);
+            }
+        }
+
+        void ActivatePart(Rigidbody2D part)
+        {
+            part.bodyType = RigidbodyType2D.Dynamic;
 
         }
 
-        
+        void SetupPart(Rigidbody2D part)
+        {
+            part.mass = m_Settings.mass;
+            part.gravityScale = m_Settings.gravity;
+
+            if (part.TryGetComponent<HingeJoint2D>(out var hj))
+            {
+                Debug.Log("HingeJoint2D setup");
+                hj.breakForce = m_Settings.breakForce;
+            }
+        }
 
     }
     [System.Serializable]
     public class BodyParts
     {
-        public Transform LeftArm;
-        public Transform LeftForearm;
-        public Transform RightArm;
-        public Transform RightForearm;
-        public Transform Chest;
-        public Transform LeftLeg;
-        public Transform LeftThigh;
-        public Transform RightLeg;
-        public Transform RightThigh;
-        public Transform Head;
+        public List<Rigidbody2D> Parts;
+
 
     }
 }

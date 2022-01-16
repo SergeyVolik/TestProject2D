@@ -13,6 +13,7 @@ namespace TestProject
         public PlayerSettings PlayerSettings;
         public BonusSettings BonusSettings;
         public GameEndSettings GameEndSettings;
+        public RagdollSettings RagdollSettings;
         public override void InstallBindings()
         {
             Container.BindInstance(Sounds);
@@ -20,6 +21,7 @@ namespace TestProject
             Container.BindInstance(PlayerSettings);
             Container.BindInstance(BonusSettings);
             Container.BindInstance(GameEndSettings);
+            Container.BindInstance(RagdollSettings);
         }
 
 
@@ -46,6 +48,13 @@ namespace TestProject
         public string WinnerText = "Winner!";
 
     }
+    [Serializable]
+    public class RagdollSettings
+    {
+        public float mass = 2;
+        public float gravity = 4;
+        public float breakForce = 2000f;
+    }
 
     [Serializable]
     public class BonusSettings
@@ -68,6 +77,8 @@ namespace TestProject
             public float bombMass = 4;
             public float bombSize = 4;
         }
+
+       
         [Serializable]
         public class ShieldSettings
         {
