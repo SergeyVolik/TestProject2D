@@ -23,9 +23,9 @@ namespace TestProject
         Player m_Player2;
 
         [SerializeField]
-        HealthHandler m_Player1HealthHandler;
+        DeathHandler m_Player1DeathHandler;
         [SerializeField]
-        HealthHandler m_Player2HealthHandler;
+        DeathHandler m_Player2DeathHandler;
 
         [SerializeField]
         Bullet m_BulletPrefab;
@@ -75,8 +75,8 @@ namespace TestProject
         {
             Container.Bind<Player>().WithId(Players.Player1).FromInstance(m_Player1).AsTransient();
             Container.Bind<Player>().WithId(Players.Player2).FromInstance(m_Player2).AsTransient();
-            Container.Bind<HealthHandler>().WithId(Players.Player1).FromInstance(m_Player1HealthHandler).AsTransient();
-            Container.Bind<HealthHandler>().WithId(Players.Player2).FromInstance(m_Player2HealthHandler).AsTransient();
+            Container.Bind<DeathHandler>().WithId(Players.Player1).FromInstance(m_Player1DeathHandler).AsTransient();
+            Container.Bind<DeathHandler>().WithId(Players.Player2).FromInstance(m_Player2DeathHandler).AsTransient();
 
             Container.Bind<TapManager>().FromInstance(Tap).AsSingle().NonLazy();
             Container.Bind<SoundManager>().AsSingle().NonLazy();

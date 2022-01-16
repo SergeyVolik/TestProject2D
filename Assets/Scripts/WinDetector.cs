@@ -6,41 +6,37 @@ using Zenject;
 
 namespace TestProject
 {
-    public class WinDetector :  IInitializable, IDisposable
+    public class WinDetector : IInitializable, IDisposable
     {
         [Inject(Id = Players.Player1)]
-        HealthHandler m_Player1;
+        DeathHandler m_Player1;
         [Inject(Id = Players.Player2)]
-        HealthHandler m_Player2;
+        DeathHandler m_Player2;
 
         public event Action OnLeftPlayerWinner;
         public event Action OnRightPlayerWinner;
 
         public void Dispose()
         {
-            if(m_Player1 != null)
-                m_Player1.OnDamageTaken -= OnDamageTaken;
+            if (m_Player1 != null)
+                m_Player1.OnDeath -= OnDeathPlayer1;
             if (m_Player2 != null)
-                m_Player2.OnDamageTaken -= OnDamageTaken;
+                m_Player2.OnDeath -= OnDeathPlayer2;
         }
-            public void Initialize()
+        public void Initialize()
         {
-            m_Player1.OnDamageTaken += OnDamageTaken;
-            m_Player2.OnDamageTaken += OnDamageTaken;
+            m_Player1.OnDeath += OnDeathPlayer1;
+            m_Player2.OnDeath += OnDeathPlayer2;
+        }
+        private void OnDeathPlayer1()
+        {
+            OnRightPlayerWinner?.Invoke();
+        }
+        private void OnDeathPlayer2()
+        {
+            OnLeftPlayerWinner?.Invoke();
         }
 
-        private void OnDamageTaken(int arg1, Collision2D arg2, bool arg3)
-        {
-            if (m_Player1.Health <= 0)
-            {
-                OnRightPlayerWinner?.Invoke();
-            }
-
-            if (m_Player2.Health <= 0)
-            {
-                OnLeftPlayerWinner?.Invoke();
-            }
-        }
 
 
     }

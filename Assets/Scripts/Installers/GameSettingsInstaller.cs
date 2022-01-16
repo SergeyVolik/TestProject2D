@@ -12,12 +12,14 @@ namespace TestProject
         public ShootingSettigs ShootingSettigs;
         public PlayerSettings PlayerSettings;
         public BonusSettings BonusSettings;
+        public GameEndSettings GameEndSettings;
         public override void InstallBindings()
         {
             Container.BindInstance(Sounds);
             Container.BindInstance(ShootingSettigs);
             Container.BindInstance(PlayerSettings);
             Container.BindInstance(BonusSettings);
+            Container.BindInstance(GameEndSettings);
         }
 
 
@@ -27,9 +29,21 @@ namespace TestProject
     public class GameSounds
     {
         public SFXSettingsSO HitSFX;
+        public SFXSettingsSO DeathSFX;
         public SFXSettingsSO BulletCollisionSFX;
         public SFXSettingsSO ShotSFX;
         public SFXSettingsSO ExplosionSFX;
+    }
+
+    [Serializable]
+    public class GameEndSettings
+    {
+        public float ShowUIDelay = 1f;
+        public float FadeUITime = 1f;
+        public string LeftPlayerWinnerText = "Left player is the winner!";
+        public string RightPlayerWinnerText = "Right player is the winner!";
+        public string WinnerText = "Winner!";
+
     }
 
     [Serializable]

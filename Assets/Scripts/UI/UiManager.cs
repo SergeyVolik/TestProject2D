@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
+using DG.Tweening;
 
 namespace TestProject
 {
@@ -17,28 +18,31 @@ namespace TestProject
 
         [SerializeField]
         private TMPro.TMP_Text m_Text;
-        [SerializeField]
-        private RectTransform Panel;
-        public bool LeftButtonClicked = false;
-        public bool RightButtonClicked = false;
 
         [SerializeField]
         private Button m_RestartButton;
         [SerializeField]
         private Button m_MainMenuButton;
+        
+        [SerializeField]
+        CanvasGroup m_EndGameUI;
 
         [Inject(Id = Players.Player1)]
         Player m_Player1;
         [Inject(Id = Players.Player2)]
         Player m_Player2;
 
-      
-        WinDetector m_WinDetector;
 
+        public bool LeftButtonClicked = false;
+        public bool RightButtonClicked = false;
+
+        WinDetector m_WinDetector;
+        GameEndSettings m_Settings;
         [Inject]
-        void Construct(WinDetector winDetector)
+        void Construct(WinDetector winDetector, GameEndSettings settings)
         {
             m_WinDetector = winDetector;
+            m_Settings = settings;
         }
 
         private void OnEnable()
@@ -55,8 +59,8 @@ namespace TestProject
 
         private void RightPlayerWinner()
         {
-            Panel.gameObject.SetActive(true);
-            m_Text.text = "Right player is the winner!";
+            ShowEndGameUI();
+            m_Text.text = m_Settings.RightPlayerWinnerText;
         }
 
         private void RestartScene()
@@ -69,8 +73,9 @@ namespace TestProject
         }
         private void LeftPlayerWinner()
         {
-            Panel.gameObject.SetActive(true);
-            m_Text.text = "Left player is the winner!";
+            ShowEndGameUI();
+          
+            m_Text.text = m_Settings.LeftPlayerWinnerText;
         }
 
         private void OnDisable()
@@ -86,6 +91,13 @@ namespace TestProject
         }
 
 
+        public void ShowEndGameUI()
+        {
+            m_EndGameUI.DOFade(1, m_Settings.FadeUITime).SetDelay(m_Settings.ShowUIDelay).OnComplete(() => {
+                m_EndGameUI.interactable = true;
+            });
+           
+        }
 
         private void LateUpdate()
         {

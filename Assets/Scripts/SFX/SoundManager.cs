@@ -34,6 +34,11 @@ namespace TestProject
             var shot = m_Factory.Create();
             shot.Play(m_Sounds.HitSFX);
         }
+        public void PlayDeathSound()
+        {
+            var shot = m_Factory.Create();
+            shot.Play(m_Sounds.DeathSFX);
+        }
 
         public void PlayExplosionSound()
         {
