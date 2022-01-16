@@ -28,6 +28,7 @@ namespace TestProject
         [SerializeField]
         bool m_LookLeft;
 
+
         public Vector2 LookDiraction => !m_LookLeft ? Vector2.right : Vector2.left;
         public bool LookLeft => m_LookLeft;
 

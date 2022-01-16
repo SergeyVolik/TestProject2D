@@ -157,6 +157,8 @@ MonoBehaviour:
   m_Player2: {fileID: 1618972177}
   m_Player1DeathHandler: {fileID: 1603427753}
   m_Player2DeathHandler: {fileID: 877928224}
+  m_Player1ShowWinnerText: {fileID: 311690017}
+  m_Player2ShowWinnerText: {fileID: 7828695852166232326}
   m_BulletPrefab: {fileID: -1240718671744208990, guid: 4c8906d9e905afb43b99087c3c8cc65f, type: 3}
   m_BloodEffectPrefab: {fileID: 2835589651114629113, guid: 8e761b0818f018f47a5993218ac7e9ce, type: 3}
   m_MuzzleFlashPrefab: {fileID: 6726121832080399835, guid: 15a4cf5e7da12824ab37246518fb156d, type: 3}
@@ -599,12 +601,22 @@ MonoBehaviour:
   m_ShotLeftButton: {fileID: 318546549}
   m_ShotRightButton: {fileID: 27429832}
   m_Text: {fileID: 1447503279}
-  Panel: {fileID: 1771095947}
-  LeftButtonClicked: 0
-  RightButtonClicked: 0
   m_RestartButton: {fileID: 2104300918}
   m_MainMenuButton: {fileID: 447089406}
   m_EndGameUI: {fileID: 473786143}
+  LeftButtonClicked: 0
+  RightButtonClicked: 0
+--- !u!114 &311690017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8405850813207982884, guid: 83ed949a98d5aeb47be21be771a2cc2a, type: 3}
+  m_PrefabInstance: {fileID: 2421506242659453681}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577461f68dbfa33488fb73eb0959fce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &318546547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2905,6 +2917,17 @@ PrefabInstance:
       objectReference: {fileID: 1753225944}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80e96b500cc29449a58dcb9cf221ac3, type: 3}
+--- !u!114 &7828695852166232326 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1730096531827983409, guid: f80e96b500cc29449a58dcb9cf221ac3, type: 3}
+  m_PrefabInstance: {fileID: 7828695852166232325}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577461f68dbfa33488fb73eb0959fce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8055827017791621100
 PrefabInstance:
   m_ObjectHideFlags: 0

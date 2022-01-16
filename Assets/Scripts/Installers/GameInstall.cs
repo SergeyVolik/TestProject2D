@@ -28,6 +28,11 @@ namespace TestProject
         DeathHandler m_Player2DeathHandler;
 
         [SerializeField]
+        ShowWinnerText m_Player1ShowWinnerText;
+        [SerializeField]
+        ShowWinnerText m_Player2ShowWinnerText;
+
+        [SerializeField]
         Bullet m_BulletPrefab;
 
         [Header("Effects")]
@@ -75,8 +80,12 @@ namespace TestProject
         {
             Container.Bind<Player>().WithId(Players.Player1).FromInstance(m_Player1).AsTransient();
             Container.Bind<Player>().WithId(Players.Player2).FromInstance(m_Player2).AsTransient();
+
             Container.Bind<DeathHandler>().WithId(Players.Player1).FromInstance(m_Player1DeathHandler).AsTransient();
             Container.Bind<DeathHandler>().WithId(Players.Player2).FromInstance(m_Player2DeathHandler).AsTransient();
+
+            Container.Bind<ShowWinnerText>().WithId(Players.Player1).FromInstance(m_Player1ShowWinnerText).AsTransient();
+            Container.Bind<ShowWinnerText>().WithId(Players.Player2).FromInstance(m_Player2ShowWinnerText).AsTransient();
 
             Container.Bind<TapManager>().FromInstance(Tap).AsSingle().NonLazy();
             Container.Bind<SoundManager>().AsSingle().NonLazy();

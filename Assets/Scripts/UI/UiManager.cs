@@ -32,12 +32,17 @@ namespace TestProject
         [Inject(Id = Players.Player2)]
         Player m_Player2;
 
+        [Inject(Id = Players.Player1)]
+        ShowWinnerText m_Player1Text;
+        [Inject(Id = Players.Player2)]
+        ShowWinnerText m_Player2Text;
 
         public bool LeftButtonClicked = false;
         public bool RightButtonClicked = false;
 
         WinDetector m_WinDetector;
         GameEndSettings m_Settings;
+
         [Inject]
         void Construct(WinDetector winDetector, GameEndSettings settings)
         {
@@ -60,6 +65,7 @@ namespace TestProject
         private void RightPlayerWinner()
         {
             ShowEndGameUI();
+            m_Player2Text.Show();
             m_Text.text = m_Settings.RightPlayerWinnerText;
         }
 
@@ -74,7 +80,8 @@ namespace TestProject
         private void LeftPlayerWinner()
         {
             ShowEndGameUI();
-          
+
+            m_Player1Text.Show();
             m_Text.text = m_Settings.LeftPlayerWinnerText;
         }
 

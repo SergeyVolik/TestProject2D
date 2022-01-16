@@ -40,6 +40,7 @@ namespace TestProject
     {
         public float ShowUIDelay = 1f;
         public float FadeUITime = 1f;
+        public float FadePlayerTextTime = 1f;
         public string LeftPlayerWinnerText = "Left player is the winner!";
         public string RightPlayerWinnerText = "Right player is the winner!";
         public string WinnerText = "Winner!";
