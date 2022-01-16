@@ -32,6 +32,7 @@ MonoBehaviour:
     AdditionalJumps: 1
     JumpForce: 600
   BonusSettings:
+    SpawnBonusTimeRange: {x: 6.98, y: 10}
     Bomb:
       timeToExplosion: 10
       explosionForce: 5000
@@ -53,6 +54,7 @@ MonoBehaviour:
   GameEndSettings:
     ShowUIDelay: 1
     FadeUITime: 1
+    FadePlayerTextTime: 1
     LeftPlayerWinnerText: Left player is the winner!
     RightPlayerWinnerText: Right player is the winner!
     WinnerText: Winner!

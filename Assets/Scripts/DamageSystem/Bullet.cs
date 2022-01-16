@@ -1,50 +1,37 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace TestProject
 {
 
-    public interface IBullet : IDamageable
-    { 
-
-    }
 
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(SpriteRenderer))]
-    public class Bullet : MonoBehaviour, IBullet
+    public class Bullet : Projectile2D, IBullet, IBulletCollision
     {
-        private Rigidbody2D m_Rg;
-        private SpriteRenderer m_SpriteRenderer;
+        private const int MaxDamage = 9999;
         private ShootingSettigs m_ShootingSettigs;
         public Player Owner;
 
         public SpriteRenderer SpriteRenderer => m_SpriteRenderer;
         public Rigidbody2D Rigidbody2D => m_Rg;
 
-        public event Action<Vector2> OnBulletCollision;
+        public event Action<Vector2> OnCollision;
+
         public bool IsExplodable;
 
         [Inject]
-        void Construct(
-            ShootingSettigs settings
-            )
+        void Construct(ShootingSettigs settings)
         {
             m_ShootingSettigs = settings;
         }
 
-        private void Awake()
-        {
-            m_SpriteRenderer = GetComponent<SpriteRenderer>();
-            m_Rg = GetComponent<Rigidbody2D>();
-        }
 
 
-
-        private void OnCollisionEnter2D(Collision2D collision)
+        protected override void OnCollisionEnter2D(Collision2D collision)
         {
             var IDamageable = collision.gameObject.GetComponent<IDamageable>();
 
@@ -65,7 +52,7 @@ namespace TestProject
                     chess.TakeDamge(m_ShootingSettigs.ChessDamage, collision, fromLeft);
                     break;
                 case IBullet bullet:
-                    bullet.TakeDamge(9999, collision, fromLeft);
+                    bullet.TakeDamge(MaxDamage, collision, fromLeft);
                     break;
                 case Bomb bomb:
                     TakeDamageInternal();
@@ -82,7 +69,7 @@ namespace TestProject
 
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        protected override void OnTriggerEnter2D(Collider2D collision)
         {
 
             if (!collision.CompareTag(Owner.tag))
@@ -96,23 +83,23 @@ namespace TestProject
         private void TakeDamageInternal()
         {
 
-            OnBulletCollision?.Invoke(transform.position);
+            OnCollision?.Invoke(transform.position);
 
 
-            StartCoroutine(WainAndDestory());
+            StartCoroutine(WaitAndDestory());
         }
 
 
         public void TakeDamge(int damage, Collision2D collision, bool fromLeft)
         {
             if(collision != null && collision.contacts.Length > 0)
-                OnBulletCollision?.Invoke(collision.contacts[0].point);
+                OnCollision?.Invoke(collision.contacts[0].point);
             
 
-            StartCoroutine(WainAndDestory());
+            StartCoroutine(WaitAndDestory());
         }
 
-        IEnumerator WainAndDestory()
+        IEnumerator WaitAndDestory()
         {
             yield return null;
             yield return null;

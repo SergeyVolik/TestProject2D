@@ -9,23 +9,23 @@ namespace TestProject
     {
 
         SoundManager m_SManager;
-        Bullet m_Bullet;
+        IBulletCollision m_Bullet;
 
         [Inject]
-        void Construct(SoundManager sManager, Bullet healthHandler)
+        void Construct(SoundManager sManager, IBulletCollision healthHandler)
         {
             m_SManager = sManager;
             m_Bullet = healthHandler;
         }
 
         private void OnEnable() =>
-            m_Bullet.OnBulletCollision += PlayBulletCollision;
+            m_Bullet.OnCollision += PlayBulletCollision;
 
 
 
 
         private void OnDisable() =>
-            m_Bullet.OnBulletCollision -= PlayBulletCollision;
+            m_Bullet.OnCollision -= PlayBulletCollision;
 
 
         void PlayBulletCollision(Vector2 pos)

@@ -50,6 +50,9 @@ namespace TestProject
     [Serializable]
     public class BonusSettings
     {
+        [MinMaxSlider(5, 20)]
+        public Vector2 SpawnBonusTimeRange;
+
         public BombSettings Bomb;
         public ShieldSettings Shield;
         public FirstAidKitSettings AidKit;
