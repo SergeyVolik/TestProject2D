@@ -16,15 +16,15 @@ namespace TestProject
 
         private void OnEnable()
         {
-            m_Bullet.OnDamageTaken += OnShot;
+            m_Bullet.OnDamageTaken += OnDamageTaken;
         }
 
         private void OnDisable()
         {
-            m_Bullet.OnDamageTaken -= OnShot;
+            m_Bullet.OnDamageTaken -= OnDamageTaken;
         }
 
-        void OnShot(int damge, Collision2D col, bool fromLeft)
+        void OnDamageTaken(int damge, Collision2D col, bool fromLeft)
         {
 
             if(col != null)

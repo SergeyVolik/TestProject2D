@@ -14,6 +14,7 @@ namespace TestProject
         [Inject]
         void Construct(SoundManager sManager, HealthHandler healthHandler)
         {
+            
             m_SManager = sManager;
             m_HealthHanlder = healthHandler;
         }

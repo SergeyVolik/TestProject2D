@@ -87,3 +87,4 @@ MonoBehaviour:
   m_ShieldPrefab: {fileID: 7189907294069711070, guid: 1f704b58fe58fb54b86ed154fd240266, type: 3}
   m_HeadShieldPrefab: {fileID: 58504146639370337, guid: e93cfd1cb7dc72442aceead5440e740f, type: 3}
   m_RoketBulletsBonusPrefab: {fileID: 1723587488, guid: 108cb1c0c2f43b4438975891dfbe94ea, type: 3}
+  m_enemy: {fileID: 5192178394797913114, guid: eda6a38ebe064b149b5bc1bdcdd158d8, type: 3}

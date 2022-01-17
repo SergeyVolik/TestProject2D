@@ -51,7 +51,10 @@ namespace TestProject
         HeadShieldBuster m_HeadShieldPrefab;
         [SerializeField]
         RoketBulletsBonus m_RoketBulletsBonusPrefab;
-
+        
+        [Header("Enemy")]
+        [SerializeField]
+        SimpleEnemy m_enemy;
         public override void InstallBindings()
         {
 
@@ -65,9 +68,17 @@ namespace TestProject
             InstallSoundShotFactory();
 
             InstallBonuses();
+
+            InstallSimpleEnemyFactory();
         }
 
-
+        private void InstallSimpleEnemyFactory()
+        {
+            Container.BindFactory<SimpleEnemy, SimpleEnemy.Factory>()
+              .FromComponentInNewPrefab(m_enemy)
+              .WithGameObjectName("SimpleEnemy")
+              .UnderTransformGroup("SimpleEnemyGroup");
+        }
 
         private void InstallProjectilesFactory()
         {

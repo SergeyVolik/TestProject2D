@@ -12,16 +12,28 @@ namespace TestProject
         public int Health { get; set; }
         public int MaxHealth { get; set; }
 
+        public bool OneHitAtFrame = false;
+        private bool hited = false;
         public event Action<int, Collision2D, bool> OnDamageTaken;
         public event Action<int> OnHealed;
         public event Action OnUpdated;
         public void TakeDamge(int damage, Collision2D collision, bool FromLeftSide)
         {
-            Health -= damage;
-            OnDamageTaken?.Invoke(damage, collision, FromLeftSide);
-            OnUpdated?.Invoke();
+            if (!hited)
+            {
+                Health -= damage;
+                OnDamageTaken?.Invoke(damage, collision, FromLeftSide);
+                OnUpdated?.Invoke();
+
+                if(OneHitAtFrame)
+                    hited = true;
+            }
         }
 
+        void Update()
+        {
+            hited = false;
+        }
         public void Heal(int value)
         {
             Health += value;

@@ -13,6 +13,7 @@ namespace TestProject
 
         public event Action OnDeath;
         private bool IsDead;
+
         [Inject]
         void Construct(HealthHandler health)
         {
