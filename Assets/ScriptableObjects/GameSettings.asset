@@ -38,7 +38,7 @@ MonoBehaviour:
       explosionForce: 7000
       explosionRadius: 4
       explosionDamage: 99999
-      bombMass: 6
+      bombMass: 5
       bombSize: 1.5
     Shield:
       duration: 5
