@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3590870413325414247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3162314150264114901}
+  - component: {fileID: 1282905358139366761}
+  - component: {fileID: -5999179707338325234}
+  m_Layer: 0
+  m_Name: ProjectContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3162314150264114901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590870413325414247}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1282905358139366761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590870413325414247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4e6589720da476459dc6dd71624b071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 13a224299ac88cf49942c7c4308fa7db, type: 2}
+  _monoInstallers:
+  - {fileID: -5999179707338325234}
+  _installerPrefabs: []
+  _parentNewObjectsUnderContext: 1
+  _editorReflectionBakingCoverageMode: 0
+  _buildsReflectionBakingCoverageMode: 0
+  _settings:
+    _ensureDeterministicDestructionOrderOnApplicationQuit: 0
+    _displayWarningWhenResolvingDuringInstall: 1
+    _validationRootResolveMethod: 0
+    _validationErrorResponse: 0
+    _signalSettings:
+      _defaultSyncMode: 0
+      _missingHandlerDefaultResponse: 2
+      _requireStrictUnsubscribe: 0
+      _defaultAsyncTickPriority: 1
+--- !u!114 &-5999179707338325234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590870413325414247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e99294a9be59f4a8148e5e5640d281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: -1240718671744208990, guid: 4c8906d9e905afb43b99087c3c8cc65f, type: 3}
+  m_RoketBulletPrefab: {fileID: 1672402571999641086, guid: 969eef141d45c504da19b88f91298e92, type: 3}
+  m_AxePrefab: {fileID: 5685862297883453242, guid: 7b22bdccadf6cbe428e39358cb64e239, type: 3}
+  m_BloodEffectPrefab: {fileID: 2835589651114629113, guid: 8e761b0818f018f47a5993218ac7e9ce, type: 3}
+  m_MuzzleFlashPrefab: {fileID: 6726121832080399835, guid: 15a4cf5e7da12824ab37246518fb156d, type: 3}
+  m_BulletCollisionEffect: {fileID: 6396400835115075429, guid: e99d8773b5f2e1f44bcbd6ba40bde2cf, type: 3}
+  m_ExplosionEffectPrefab: {fileID: -4549473905968330454, guid: afb29246a4e99f44886d949a10c7a421, type: 3}
+  m_SoundShotPrefab: {fileID: 7151966641208392374, guid: 6f5a854c7cd0d7e4998fb354ff2bddcb, type: 3}
+  m_BombPrefab: {fileID: 2431175756155921327, guid: 01fa2f3a4d21ecf4198a72dd7ff315ee, type: 3}
+  m_FirstAidKitPrefab: {fileID: 731894986608544885, guid: 436b456862ae04a489b37cb4448b0a1a, type: 3}
+  m_ShieldPrefab: {fileID: 7189907294069711070, guid: 1f704b58fe58fb54b86ed154fd240266, type: 3}
+  m_HeadShieldPrefab: {fileID: 58504146639370337, guid: e93cfd1cb7dc72442aceead5440e740f, type: 3}
+  m_RoketBulletsBonusPrefab: {fileID: 1723587488, guid: 108cb1c0c2f43b4438975891dfbe94ea, type: 3}
