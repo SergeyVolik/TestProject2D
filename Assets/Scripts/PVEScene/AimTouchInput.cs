@@ -1,21 +1,27 @@
+using System;
 using UnityEngine;
+using Zenject;
 
 namespace TestProject.PVE
 {
-    public class Trajectoryinput : MonoBehaviour
+    public class AimTouchInput : ITickable
     {
-        [SerializeField]
-        TrajectoryRenderer m_Renderer;
+        private bool startCalc;
+        private Vector3 startPos;
+        private Vector3 endPos;
 
+        public event Action<Vector2> OnAimStarted;
+        public event Action OnAimEnded;
+     
 
-        bool startCalc;
-
-        Vector3 startPos;
-        Vector3 endPos;
-
+        private Vector3 m_AimVector;
         [SerializeField]
         float m_Strength = 10;
-        void Update()
+
+        public Vector3 AimVector => m_AimVector;
+        public Vector3 StartPos => startPos;
+        public Vector3 EndPos => endPos;
+        public void Tick()
         {
 
 #if UNITY_EDITOR
@@ -23,14 +29,13 @@ namespace TestProject.PVE
             {
                 startCalc = true;
                 startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward;
-
-                print($"startPos: {startPos}");
+                OnAimStarted?.Invoke(startPos);
             }
 
             if (Input.GetMouseButtonUp(0))
             {
                 startCalc = false;
-                m_Renderer.Hide();
+                OnAimEnded?.Invoke();
             }
 
 
@@ -42,27 +47,28 @@ namespace TestProject.PVE
             {
                 startCalc = true;
                 startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward;
-
-                print($"startPos: {startPos}");
+                OnAimStarted?.Invoke(startPos);
             }
 
             if (touch.phase == TouchPhase.Ended)
             {
                 startCalc = false;
+                OnAimEnded?.Invoke();
             }
 #endif
 
             if (startCalc)
             {
                 endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward;
-                //var vector = endPos - startPos;
+                m_AimVector = endPos - startPos;
                 //var mag = vector.magnitude;
                 //vector = vector.normalized * m_Strength * mag;//Vector3.Distance(startPos, endPos);
-                m_Renderer.DrawLine(startPos, endPos);
             }
 
 
         }
+
+
     }
 
 }
