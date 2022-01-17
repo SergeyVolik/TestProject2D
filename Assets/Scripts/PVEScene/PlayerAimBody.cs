@@ -67,11 +67,11 @@ namespace TestProject.PVE
 
                
             }
-            else 
-            {
+            //else 
+            //{
 
-                m_Spine.rotation = Quaternion.RotateTowards(m_Spine.rotation, m_InitRot, Time.deltaTime * m_RotSpeed);
-            }
+            //    m_Spine.rotation = Quaternion.RotateTowards(m_Spine.rotation, m_InitRot, Time.deltaTime * m_RotSpeed);
+            //}
         }
     }
 

@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0138e1984c6f3bd41ab7891f3a99d0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_AxePrefab: {fileID: 5685862297883453242, guid: 7b22bdccadf6cbe428e39358cb64e239, type: 3}
 --- !u!1001 &190870866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1983,6 +1984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1305799923120439867}
   - component: {fileID: 1305799923120439868}
+  - component: {fileID: 1305799923120439869}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2024,6 +2026,22 @@ MonoBehaviour:
   m_Spine: {fileID: 1032016011}
   m_RotSpeed: 100
   MinMaxXAngles: {x: -60, y: 60}
+--- !u!114 &1305799923120439869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305799923120439866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a322803074931394aae3c407b07279a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BodyAxe: {fileID: 554762591}
+  m_Spine: {fileID: 1032016011}
+  Power: 1000
+  AxeRotPower: 200
 --- !u!212 &1305799923163209430
 SpriteRenderer:
   m_ObjectHideFlags: 0
