@@ -7,7 +7,7 @@ namespace TestProject.PVE
 {
     public class Axe : Projectile2D
     {
-        private Rigidbody2D rb;
+        public Rigidbody2D rb;
         private Collider2D[] colliders;
 
         protected override void OnCollisionEnter2D(Collision2D collision)

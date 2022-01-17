@@ -10,10 +10,13 @@ namespace TestProject.PVE
     {
         private SimpleEnemy.Factory m_Factory;
 
+        SignalBus m_SignalBus;
+
         [Inject]
-        void Construct(SimpleEnemy.Factory factory)
+        void Construct(SimpleEnemy.Factory factory, SignalBus signalBus)
         {
             m_Factory = factory;
+            m_SignalBus = signalBus;
         }
 
         [SerializeField]
@@ -42,7 +45,8 @@ namespace TestProject.PVE
 
         private void DestroyPrevEnemyAndSpawnNew()
         {
-           
+            m_SignalBus.Fire(new EnemyKillSignal());
+
             m_PrevEnemy.Death.OnDeath -= Death_OnDeath;
             StartCoroutine(DestroyWithDelay(m_PrevEnemy.gameObject));
             

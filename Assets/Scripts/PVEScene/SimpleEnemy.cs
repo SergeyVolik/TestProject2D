@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using DG.Tweening;
 
 namespace TestProject.PVE
 {
@@ -11,8 +12,19 @@ namespace TestProject.PVE
         RagdollModel m_rdModel;
         Animator m_anim;
         public DeathHandler Death => m_Death;
-        [Inject]
-        void Construct(DeathHandler death, HealthHandler health, RagdollModel rdModel, Animator anim)
+
+        [SerializeField]
+        Transform Shield;
+        float shieldSize;
+        bool shieldActivated = false;
+        SignalBus m_SignalBus;
+       [Inject]
+        void Construct(
+           DeathHandler death,
+           HealthHandler health,
+           RagdollModel rdModel,
+           Animator anim,
+           SignalBus sBus)
         {
             m_Death = death;
             m_rdModel = rdModel;
@@ -20,11 +32,37 @@ namespace TestProject.PVE
             health.MaxHealth = 5;
             health.Health = 5;
             health.OneHitAtFrame = true;
+            m_SignalBus = sBus;
         }
 
+        private void Start()
+        {
+            shieldSize = Shield.transform.localScale.x;
+            Shield.transform.localScale = Vector3.zero;
+        }
         private void OnEnable()
         {
             m_Death.OnDeath += M_Death_OnDeath;
+            m_SignalBus.Subscribe<ActivateShieldSignal>(M_ui_ActivateShieldInput);
+        }
+        private void OnDisable()
+        {
+            m_Death.OnDeath -= M_Death_OnDeath;
+            m_SignalBus.Unsubscribe<ActivateShieldSignal>(M_ui_ActivateShieldInput);
+        }
+        private void M_ui_ActivateShieldInput()
+        {
+            if (!shieldActivated)
+            {
+                shieldActivated = true;
+                Sequence mySequence = DOTween.Sequence();
+                mySequence.Append(Shield.transform.DOScale(shieldSize, 1))              
+                  .Append(Shield.transform.DOScale(0, 1).SetDelay(4f));
+
+                mySequence.OnComplete(() => {
+                    shieldActivated = false;
+                });
+            }
         }
 
         private void M_Death_OnDeath()
@@ -34,10 +72,7 @@ namespace TestProject.PVE
             m_rdModel.Activate();
         }
 
-        private void OnDisable()
-        {
-            m_Death.OnDeath -= M_Death_OnDeath;
-        }
+       
 
         public class Factory : PlaceholderFactory<SimpleEnemy> { }
     }

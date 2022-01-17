@@ -57,6 +57,7 @@ namespace TestProject
         SimpleEnemy m_enemy;
         public override void InstallBindings()
         {
+            DeclareSignals();
 
             Container.Bind<SoundManager>().AsSingle().NonLazy();
             Container.Bind<VFXManager>().AsSingle().NonLazy();
@@ -70,6 +71,15 @@ namespace TestProject
             InstallBonuses();
 
             InstallSimpleEnemyFactory();
+        }
+
+        private void DeclareSignals()
+        {
+            SignalBusInstaller.Install(Container);
+
+            Container.DeclareSignal<EnemyKillSignal>();
+            Container.DeclareSignal<ActivateShieldSignal>();
+            Container.DeclareSignal<UIActivatedSignal>();
         }
 
         private void InstallSimpleEnemyFactory()
